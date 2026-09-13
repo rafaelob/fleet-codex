@@ -1,49 +1,40 @@
 # Lean Delivery
 
-Lean Delivery is a public Codex Multi-Agent V2 arrangement for clearly bounded delivery where the emphasis is a lean role allocation. It uses Luna for ordinary delivery, reserves Sol for read-only integration synthesis and reconciliation, and reserves Astra for critical review. Its main session uses `gpt-5.6-sol` at `high` reasoning effort; each role below is pinned independently.
+Cost-conscious, well-bounded delivery with Luna implementing and reviewing, Sol reconciling deliveries, and one Astra advisor for decisions. The lead uses `gpt-5.6-sol` at `high`. This is an allocation policy, not a measured quality or cost guarantee.
 
-## Contents
+## Install
 
-- `config.toml` enables Multi-Agent V2 with the `agents` tool namespace.
-- `agents/` contains the 19 role cards.
-- `AGENTS.snippet.md` is self-contained orchestration guidance.
-- `AGENTS.with-skill.snippet.md` optionally uses `codex-orchestration` and `pragmatic-programmer`, with a standalone fallback.
-- `arrangement.toml` describes this arrangement and its optional hook and skills.
-
-Follow the repository [installation guide](../../docs/installation.md) to install an arrangement. This arrangement has no executable dependencies.
+Follow the [installation guide](../../docs/installation.md). Merge only `config.toml`, install the 8 `agents/*.toml` cards, and insert either `AGENTS.snippet.md` or the optional-skill variant. The manifest references independent, optional skills and a hook; none is automatically enabled. No private tools or configuration are required.
 
 ## Routing
 
-Classify the task first, then select the least resource-intensive available role that can safely produce the required artifact after checking its current resolved allocation. This arrangement focuses on bounded, established work: all ordinary workers use Luna, `integrator-reviewer` uses Sol only to synthesize and reconcile separate deliveries while remaining read-only, and `critical-reviewer` uses Astra. Among child roles, use at most one active `critical-reviewer` and one active `integrator-reviewer`; all other active children use Luna, while the lead is separate. Escalate when task complexity requires it; the name describes allocation intent, not a measured price or quality claim.
+Read the live role's description, instructions, resolved model and effort before dispatch. Match the artifact and task difficulty, not the role name alone. Luna is an implementation model for established patterns, not just a reconnaissance option. Keep implementation, advice, and independent review separate.
+
+Use at most one active `advisor` and one active `integrator-reviewer`; other child roles use Luna. An advisor remains read-only and is not an implementation fallback. Coupled and unknown-cause implementation belongs to the parent. If risk exceeds the available reviewer, obtain independently qualified review; do not weaken acceptance.
 
 | Role | Model | Reasoning effort |
 | --- | --- | --- |
-| advisor | gpt-5.6-luna | max |
-| backend-worker-light | gpt-5.6-luna | max |
+| advisor | gpt-6-astra | high |
 | backend-worker | gpt-5.6-luna | max |
 | code-reviewer | gpt-5.6-luna | max |
-| critical-reviewer | gpt-6-astra | high |
-| database-engineer | gpt-5.6-luna | max |
-| debugger | gpt-5.6-luna | max |
-| design-lead | gpt-5.6-luna | max |
-| docs-writer | gpt-5.6-luna | max |
+| critical-reviewer | gpt-5.6-luna | max |
 | explorer | gpt-5.6-luna | max |
-| frontend-worker-light | gpt-5.6-luna | max |
 | frontend-worker | gpt-5.6-luna | max |
-| hard-task-specialist | gpt-5.6-luna | max |
-| infra-sre | gpt-5.6-luna | max |
 | integrator-reviewer | gpt-5.6-sol | high |
 | researcher | gpt-5.6-luna | max |
-| security-sweep | gpt-5.6-luna | max |
-| test-engineer | gpt-5.6-luna | max |
-| test-runner | gpt-5.6-luna | max |
 
-Before spawning, inspect the runtime's live role description and exposed spawn schema; use only a currently available role with its current resolved model and reasoning effort. A running-agent listing is not a role catalog. In a lean installation, return coupling that exceeds the available specialist role to the parent for a stronger available role or a decision. Spawn a selected card with explicit `agent_type` and `fork_turns: "none"`; do not set a model or reasoning effort on the spawn call. Give the child a bounded brief, keep writing assignments non-overlapping, and have the parent inspect every delivery and verify its evidence.
+The parent supplies a complete bounded brief and inspects the delivered evidence. Every spawn uses `agent_type` and `fork_turns: "none"`, with no call-level model or effort override. Children never spawn children.
 
-## Capacity
+## Capacity and simplicity
 
-The configuration sets `features.multi_agent_v2.max_concurrent_threads_per_session = 7`: seven total slots including the lead in the target binary's resolved instructions. Use no more than 6 simultaneous children. Live saturation and slot release are separate checks in the [validation record](../../docs/validation.md). Continue independent local work when a spawn is refused.
+The V2 fragment sets **3 total threads including the lead**, allowing **at most 2 simultaneous children** in the target runtime. Start with one useful delegation and add another only for a disjoint result. Reconcile an implementation batch before starting another; do not fill the cap by routine.
+
+The 8 role cards are available responsibilities, not 8 running agents. Removed roles have explicit owners:
+
+Backend/frontend workers handle small edits and write and run their own regression tests. Advisor supplies design direction but never implements. The parent owns documentation, standalone test execution, database and infrastructure work, and coupled or unknown-cause implementation; request separately qualified help when these exceed the parent's scope or capability. Critical-reviewer handles security review; never downgrade the required evidence.
+
+This is an adapted public roster, not a full personal-profile export. Retained roles preserve the task-based model allocation. Conservative caps are design choices, not benchmark-derived optima; see [the rationale](../../docs/orchestration.md).
 
 ## Validation status
 
-This catalog makes no claim of completed runtime validation. Validate the installed arrangement against the Codex version named in `arrangement.toml` before relying on it in production work.
+Revision 0.2.0 changes allocations and caps. Historical native tests from 0.1.0 do not certify this revision. Full live role coverage, concurrency saturation, and slot release remain unverified; see [the validation record](../../docs/validation.md). Installation still requires account/model availability and compatible runtime checks.

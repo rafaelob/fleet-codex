@@ -8,10 +8,17 @@ For dispatch, call the runtime's Skill tool with `codex-orchestration` when expo
 If it is absent, inspect relevant live role descriptions and the current spawn schema; `list_agents` shows the running tree, not a role catalog.
 Match an available role and its resolved allocation to read-only discovery, research, decision, or review; a bounded known artifact; unknown-cause diagnosis; coupled invariants; or integration review.
 Use the least resource-intensive safe role; do not give edits to a read-only role.
+Luna workers may implement established patterns; model allocation does not change a role's mandate.
+Reserve Sol for backend implementation, unknown-cause diagnosis, ordinary review, and integration review; reserve Astra for advice, design direction, coupled implementation, and critical review.
+
+### Responsibilities
+
+Regular backend/frontend workers also handle fully specified small edits. The parent writes documentation; critical-reviewer handles scoped security review. Light variants and a separate security sweep are omitted.
 
 ### Dispatch contract
 
 The parent owns selection, integration, validation, and outcome; children never spawn children.
+Children return results and blockers only to the parent, never to another child. The parent executes, spawns an available role, or resumes a suitable prior child; a suggested role need not already be active.
 Every spawn explicitly sets `agent_type` and `fork_turns: "none"` and omits call-level model and reasoning-effort overrides.
 The brief contains only relevant context, accepted decisions, and any relevant plan; outcome and acceptance criterion; in/out scope and ownership; interfaces and access constraints; expected artifact and checks; and stop conditions plus next consumer.
 It needs neither a separate plan document nor a history dump.
@@ -30,5 +37,5 @@ If it is absent, explain the green signal, name one knowledge authority, validat
 
 ### Capacity
 
-This fragment configures 6 total session threads, including the parent; use at most 5 simultaneous children.
+This fragment configures 5 total session threads, including the parent; use at most 4 simultaneous children. Start with one useful child, not a full roster.
 See [runtime validation](https://github.com/rafaelob/fleet-codex/blob/main/docs/validation.md) for environment-specific verification. A refused spawn does not justify idling while independent local work remains.

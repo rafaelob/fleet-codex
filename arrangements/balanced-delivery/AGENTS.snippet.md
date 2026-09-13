@@ -7,11 +7,11 @@ Inspect relevant live role descriptions and the current spawn schema; `list_agen
 Match an available role and its resolved allocation to read-only discovery, research, decision, or review; a bounded known artifact; unknown-cause diagnosis; coupled invariants; or integration review.
 Use the least resource-intensive safe role; do not give edits to a read-only role.
 Luna workers may implement established patterns; model allocation does not change a role's mandate.
-Reserve Sol for backend implementation, unknown-cause diagnosis, ordinary review, and integration review; reserve Astra for advice, design direction, coupled implementation, and critical review.
+Reserve Astra for `advisor` and `hard-task-specialist`, and Sol for `backend-worker` and `integrator-reviewer`. Other roles use Luna, including critical review; if the evidence or available reviewer is insufficient for the risk, return to the parent for an independently qualified review.
 
 ### Responsibilities
 
-Regular backend/frontend workers also handle fully specified small edits. The parent writes documentation; critical-reviewer handles scoped security review. Light variants and a separate security sweep are omitted.
+Regular workers also handle small edits and create their regression tests. Advisor supplies design direction; hard-task-specialist handles unknown-cause diagnosis before a scoped repair. The parent writes documentation; critical-reviewer handles security review. Test-runner runs existing checks and never becomes a test author.
 
 ### Dispatch contract
 
@@ -30,5 +30,5 @@ Only the parent integrates, inspects the diff, and verifies responsible checks; 
 
 ### Capacity
 
-This fragment configures 5 total session threads, including the parent; use at most 4 simultaneous children. Start with one useful child, not a full roster.
+This fragment configures 4 total session threads, including the parent; use at most 3 simultaneous children. Start with one useful child, not a full roster.
 See [runtime validation](https://github.com/rafaelob/fleet-codex/blob/main/docs/validation.md) for environment-specific verification. A refused spawn does not justify idling while independent local work remains.

@@ -7,4 +7,4 @@ multi_agent = true
 [features.multi_agent_v2]
 enabled = true
 tool_namespace = "agents"
-max_concurrent_threads_per_session = 7
+max_concurrent_threads_per_session = 3

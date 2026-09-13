@@ -2,22 +2,25 @@
 
 Este catálogo reúne combinações completas de um agente principal e seus
 especialistas. Os arquivos funcionam sem framework privado, servidor MCP ou
-skills externas obrigatórias. Cada arranjo fornece 19 papéis; você inicia apenas
+skills externas obrigatórias. Os arranjos fornecem 15, 12 e 8 papéis; você inicia apenas
 os que ajudam na tarefa.
 
 | Arranjo | Principal | Especialistas |
 | --- | --- | --- |
-| [Advanced Delivery](../arrangements/advanced-delivery/README.md) | Sol `xhigh` | 4 Astra, 9 Terra e 6 Luna |
-| [Lean Delivery](../arrangements/lean-delivery/README.md) | Sol `high` | 1 Astra, 1 Sol e 17 Luna |
+| [Advanced Delivery](../arrangements/advanced-delivery/README.md) | Sol `xhigh` | 4 Astra, 4 Sol e 7 Luna |
+| [Balanced Delivery](../arrangements/balanced-delivery/README.md) | Sol `xhigh` | 2 Astra, 2 Sol e 8 Luna |
+| [Lean Delivery](../arrangements/lean-delivery/README.md) | Sol `high` | 1 Astra, 1 Sol e 6 Luna |
 
-Ambos habilitam Multi-Agent V2. Advanced Delivery prioriza trabalhos de produto
+Os três habilitam Multi-Agent V2. Advanced Delivery prioriza trabalhos de produto
 complexos, com mais modelos fortes para decisões e implementação acoplada.
-Lean Delivery prioriza o custo em trabalho bem definido, concentra trabalho em Luna e reserva
-Sol `high` para revisão da integração e Astra para revisão crítica.
-Frontend e backend ficam com Luna, assim como os demais papéis.
+Balanced Delivery reserva Astra para aconselhamento e implementação acoplada,
+e Sol para backend e integração. Lean Delivery concentra trabalho em Luna e reserva
+Sol `high` para revisão da integração e Astra para aconselhamento somente leitura.
+No Lean, frontend e backend ficam com Luna, assim como os demais papéis.
 Isso descreve a distribuição escolhida; não é uma promessa medida de preço ou
-qualidade. Os tetos configurados são 6 e 7, com recomendação conservadora de até
-5 e 6 filhos ativos, respectivamente. Confira a [compatibilidade](validation.md).
+qualidade. Os tetos configurados são 5, 4 e 3 threads totais, permitindo até
+4, 3 e 2 filhos ativos, respectivamente. Os papéis são opções, não agentes
+iniciados juntos. Confira os limites de [validação](validation.md).
 
 ## Instalar
 

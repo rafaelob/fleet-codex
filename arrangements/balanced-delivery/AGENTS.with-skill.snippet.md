@@ -9,11 +9,11 @@ If it is absent, inspect relevant live role descriptions and the current spawn s
 Match an available role and its resolved allocation to read-only discovery, research, decision, or review; a bounded known artifact; unknown-cause diagnosis; coupled invariants; or integration review.
 Use the least resource-intensive safe role; do not give edits to a read-only role.
 Luna workers may implement established patterns; model allocation does not change a role's mandate.
-Use at most one active `advisor` and one active `integrator-reviewer`; other child roles use Luna. An advisor remains read-only and is not an implementation fallback. If coupling or risk exceeds the available implementing or reviewing role, return to the parent; do not weaken acceptance.
+Reserve Astra for `advisor` and `hard-task-specialist`, and Sol for `backend-worker` and `integrator-reviewer`. Other roles use Luna, including critical review; if the evidence or available reviewer is insufficient for the risk, return to the parent for an independently qualified review.
 
 ### Responsibilities
 
-Backend/frontend workers handle small edits and write and run their own regression tests. Advisor supplies design direction but never implements. The parent owns documentation, standalone test execution, database and infrastructure work, and coupled or unknown-cause implementation; request separately qualified help when these exceed the parent's scope or capability. Critical-reviewer handles security review; never downgrade the required evidence.
+Regular workers also handle small edits and create their regression tests. Advisor supplies design direction; hard-task-specialist handles unknown-cause diagnosis before a scoped repair. The parent writes documentation; critical-reviewer handles security review. Test-runner runs existing checks and never becomes a test author.
 
 ### Dispatch contract
 
@@ -37,5 +37,5 @@ If it is absent, explain the green signal, name one knowledge authority, validat
 
 ### Capacity
 
-This fragment configures 3 total session threads, including the parent; use at most 2 simultaneous children. Start with one useful child, not a full roster.
+This fragment configures 4 total session threads, including the parent; use at most 3 simultaneous children. Start with one useful child, not a full roster.
 See [runtime validation](https://github.com/rafaelob/fleet-codex/blob/main/docs/validation.md) for environment-specific verification. A refused spawn does not justify idling while independent local work remains.

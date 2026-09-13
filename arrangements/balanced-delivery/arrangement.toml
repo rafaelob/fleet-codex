@@ -1,8 +1,8 @@
 schema_version = 1
-id = "lean-delivery"
+id = "balanced-delivery"
 version = "0.2.0"
 author = "Rafael Bittencourt"
-description = "Lean Delivery: Cost-conscious, well-bounded delivery with Luna implementing and reviewing, Sol reconciling deliveries, and one Astra advisor for decisions."
+description = "Balanced Delivery: Everyday product delivery with Luna implementing established patterns, Sol handling backend work and integration review, and Astra handling decisions and coupled implementation."
 license = "MIT"
 codex_version = "0.155.0-alpha.3.10"
 config = "config.toml"

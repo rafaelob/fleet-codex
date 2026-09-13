@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.0 — 2026-09-13
+
+- Add Balanced Delivery for everyday product work: two Astra roles, two Sol roles,
+  and eight Luna roles, with explicit implementation and read-only boundaries.
+- Rebalance Advanced to four Astra, four Sol and seven Luna roles, without Terra.
+- Reserve Lean's single Astra role for advice; integration remains Sol high and
+  its six other roles use Luna max, including implementation and independent review.
+- Simplify active teams to at most four, three and two children respectively,
+  with progressively smaller catalogs of fifteen, twelve and eight roles. Removed
+  responsibilities have explicit owners; all handoffs go through the parent.
+- Keep prior native runtime evidence explicitly historical; do not claim that
+  allocation changes or smaller caps have received complete runtime validation.
+
 ## 0.1.0
 
 - Introduce Advanced Delivery for complex product work and Lean Delivery for
