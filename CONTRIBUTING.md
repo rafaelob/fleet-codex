@@ -59,6 +59,11 @@ personal paths.
 The required thread cap is features.multi_agent_v2.max_concurrent_threads_per_session;
 the optional root agents table may contain only default subagent model and
 reasoning-effort values.
+The V2 table also accepts optional `min_wait_timeout_ms`, `default_wait_timeout_ms`
+and `max_wait_timeout_ms`. Values must be integers from 0 through 3600000; after
+applying native defaults, minimum <= default <= maximum must hold. See
+[configuration](docs/configuration.md#native-child-wait-settings). Explain any
+different choice without claiming unmeasured token savings.
 An optional hook is a contained relative directory with a README.md documenting
 installation, supported runtime and entrypoint; its implementation may use any
 supported language and does not require a guard.py file.

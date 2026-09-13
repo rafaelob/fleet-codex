@@ -11,7 +11,7 @@ third-party orchestration service to use these files.
 [Skills](skills/README.md) · [Plugins](plugins/README.md) ·
 [Validation and compatibility](docs/validation.md)
 
-Version 0.2.1 is a community preview. Historical hook and selected-role tests are
+Version 0.3.0 is a community preview. Historical hook and selected-role tests are
 recorded; the revised allocations and caps are not fully runtime-certified.
 
 ## Choose an arrangement
@@ -25,6 +25,11 @@ recorded; the revised allocations and caps are not fully runtime-certified.
 The three arrangements provide progressively smaller role catalogs and enable
 Multi-Agent V2. Roles are available choices, not agents started together. Allocate only useful,
 independent work; parallel calls consume additional model tokens.
+
+All three use a one-minute minimum and five-minute default for native child
+waits. [Adaptive waiting](docs/orchestration.md#adaptive-waiting) explains how to
+choose task-appropriate windows and reduce empty polling without changing budgets.
+This is not a measured quota-savings guarantee.
 
 Advanced Delivery targets complex product work and spends more of its model
 allocation on design, advice, critical review and coupled implementation.

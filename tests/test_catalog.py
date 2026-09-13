@@ -102,6 +102,48 @@ class CatalogValidatorTests(unittest.TestCase):
     def validate(self, root: Path) -> validate_catalog.ValidationResult:
         return validate_catalog.validate_catalog(root)
 
+    def test_accepts_optional_wait_windows_and_boundary_values(self) -> None:
+        for fields in (
+            "min_wait_timeout_ms = 60000\ndefault_wait_timeout_ms = 300000",
+            "max_wait_timeout_ms = 30000",
+            "min_wait_timeout_ms = 0\ndefault_wait_timeout_ms = 0\nmax_wait_timeout_ms = 0",
+            "min_wait_timeout_ms = 3600000\ndefault_wait_timeout_ms = 3600000",
+        ):
+            with self.subTest(fields=fields), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                config = build_catalog(root) / "config.toml"
+                config.write_text(
+                    config.read_text(encoding="utf-8").replace(
+                        "[agents]", f"{fields}\n\n[agents]"
+                    ),
+                    encoding="utf-8",
+                )
+                self.assertEqual([], self.validate(root).errors)
+
+    def test_rejects_invalid_wait_types_ranges_and_effective_order(self) -> None:
+        for fields in (
+            "min_wait_timeout_ms = true",
+            'default_wait_timeout_ms = "300000"',
+            "default_wait_timeout_ms = 300000.0",
+            "max_wait_timeout_ms = -1",
+            "max_wait_timeout_ms = 3600001",
+            "min_wait_timeout_ms = 60000",
+            "max_wait_timeout_ms = 20000",
+            "min_wait_timeout_ms = 60000\nmax_wait_timeout_ms = 50000",
+        ):
+            with self.subTest(fields=fields), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                config = build_catalog(root) / "config.toml"
+                config.write_text(
+                    config.read_text(encoding="utf-8").replace(
+                        "[agents]", f"{fields}\n\n[agents]"
+                    ),
+                    encoding="utf-8",
+                )
+                errors = "\n".join(self.validate(root).errors)
+                self.assertIn("wait timeout", errors)
+                self.assertNotIn("unsupported key", errors)
+
     def test_accepts_complete_catalog_and_reports_counts(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

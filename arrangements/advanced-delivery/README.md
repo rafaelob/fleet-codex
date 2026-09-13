@@ -44,4 +44,10 @@ This is an adapted public roster, not a full personal-profile export. Retained r
 
 ## Validation status
 
+Revision 0.3.0 adds a one-minute minimum and five-minute default for native child
+waits, without changing this roster or cap. Choose explicit waits according to
+the task; see [adaptive waiting](../../docs/orchestration.md#adaptive-waiting)
+and [upgrade instructions](../../docs/installation.md#upgrading-from-02x).
+Configuration checks are not measurements of quota savings or waiting behavior.
+
 Revision 0.2.0 changes allocations and caps. Historical native tests from 0.1.0 do not certify this revision. Full live role coverage, concurrency saturation, and slot release remain unverified; see [the validation record](../../docs/validation.md). Installation still requires account/model availability and compatible runtime checks.

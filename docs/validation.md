@@ -9,6 +9,29 @@ or a configured cap alone is not a completed implementation or saturation test.
 
 ## Current measured status
 
+### 0.3.0 wait configuration — 2026-09-13
+
+On Windows with `codex-cli 0.155.0-alpha.3.10`, three fresh isolated homes loaded
+the actual arrangement fragments and all their current role cards. The native
+`app-server --stdio --strict-config` accepted each configuration; `config/read`
+returned `min_wait_timeout_ms=60000` and `default_wait_timeout_ms=300000` for
+Advanced, Balanced and Lean. No credentials were copied and no model turn ran.
+The owned process trees exited and the disposable homes were removed.
+
+Negative control: `codex debug prompt-input` with minimum 400000 and default
+300000 exited 1 with `features.multi_agent_v2.default_wait_timeout_ms must be at
+least features.multi_agent_v2.min_wait_timeout_ms`. This proves real ordering
+validation, not merely successful TOML parsing or silently ignored fields.
+
+The catalog and component validators passed; all 39 standard-library tests
+passed. New regression cases exercise optional fields, native defaults, zero and
+upper boundaries, wrong types and invalid effective ordering. The updated skill
+also passed its frontmatter validator. These checks do not measure wake latency,
+agent adherence, token savings, five-hour quota usage or automatic goal loops.
+Native role execution and platform limitations below remain unchanged.
+
+### Historical role and hook execution
+
 Version 0.1.0 is a community catalog preview, not a certification of every role,
 platform or concurrency limit. Known integration limits are listed below.
 

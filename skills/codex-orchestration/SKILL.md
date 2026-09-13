@@ -1,6 +1,6 @@
 ---
 name: codex-orchestration
-description: "Route bounded Codex subagent work from live role availability, use the V2 spawn contract, and reconcile independent deliveries."
+description: "Route bounded Codex subagent work, coordinate ongoing tasks with appropriate native waits, and reconcile independent deliveries using live roles and the V2 spawn contract."
 license: Apache-2.0
 ---
 
@@ -38,6 +38,16 @@ Use an action verb that matches the needed result: inspect, implement, test, rev
 `send_message` queues a message for an existing child but does not start or resume its turn. Use `followup_task` to give a completed child a new turn while preserving its history.
 
 Respect the chosen arrangement's allocation, per-role limits, and configured cap, then confirm the current runtime's resolved limits. A refused spawn is not a reason to idle: continue independent local work and wait only when nothing remains to advance.
+
+## Wait according to the task
+
+If useful independent work remains, do it. Otherwise, use the native event-aware child wait rather than repeatedly listing agents or asking whether they have finished. Choose a timeout within the runtime's limits using expected duration, task complexity, workload, and observable milestones, not file count alone. Use the configured default for an ordinary wait; choose an explicit shorter or longer window when the task warrants it. Incoming messages or user input can end the wait before its timeout.
+
+Set a task-appropriate point for investigating missing progress, separate from the wait window. A timeout means no event arrived within that window; a running status does not establish progress. When the investigation point is reached, inspect the relevant status or artifact and ask one focused question if needed; do not endlessly extend waits or interrupt healthy work merely because one window expired.
+
+Children should report actionable blockers, meaningful milestones, and their final artifact, not periodic messages saying they are still working. The parent receives those communications, not the child's complete transcript. On wake, use the new evidence; query status only when it answers a concrete coordination or diagnostic question.
+
+Child waits, terminal polls, and code-mode cell waits have separate arguments and limits. Use each tool's live schema, choose a suitable supported wait, and retain ownership of started processes. These instructions do not alter budgets, goal state, permissions, or the harness's automatic continuation behavior.
 
 ## Coordinate and accept
 
