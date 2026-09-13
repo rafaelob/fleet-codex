@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.0 — 2026-09-13
+
+- Set native child waits to a one-minute minimum and five-minute default in all
+  three arrangements, preserving budgets, goals, models, caps and hooks.
+- Extend the existing optional orchestration skill with task-appropriate waits,
+  meaningful progress signals and a separate point for investigating a stall.
+  Keep the installable rules concise.
+- Explain context flow, automatic goal continuation, timing tradeoffs, upgrade
+  and rollback; distinguish configuration evidence from unmeasured quota savings.
+- Validate optional wait fields, including types, bounds and effective ordering.
+
 ## 0.2.1 — 2026-09-13
 
 - Keep insertable delegation rules concise: remove roster counts, concurrency

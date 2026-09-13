@@ -5,6 +5,24 @@ the [validation record](validation.md); these packages target Multi-Agent V2 and
 do not silently fall back to V1. You need access to the named models. Python 3.11+
 is needed only for the optional hook and local validation.
 
+## Upgrading from 0.2.x
+
+Version 0.3.0 keeps the same roles, models and concurrency caps. Merge these two
+fields into your existing `[features.multi_agent_v2]` table, without declaring
+the table twice:
+
+```toml
+min_wait_timeout_ms = 60000
+default_wait_timeout_ms = 300000
+```
+
+Check any existing maximum for compatibility; it must be at least 300000.
+Preserve unrelated settings, budgets and goals. Refresh the chosen instruction
+snippet and, only if installed, the existing `codex-orchestration` skill. Start a
+new session and verify effective settings. To roll back, restore the prior two
+fields (remove them if previously absent) and affected instruction sections.
+See [configuration](configuration.md#native-child-wait-settings) for semantics.
+
 ## Upgrading from 0.1.0
 
 Copying a smaller roster over the old directory does not remove obsolete cards.
@@ -26,6 +44,11 @@ For rollback, restore prior arrangement cards and matching fragments together;
 never restore a whole home over newer credentials or unrelated configuration.
 
 ## Choose a scope
+
+Prefer inserting the snippet into your user-level `$CODEX_HOME/AGENTS.md` when
+you want the same orchestration across projects. Insert it into the project's
+root `AGENTS.md` instead when the policy belongs only to that project. Insert a
+section, never replace the file or install this repository's maintainer AGENTS.md.
 
 Both snippet variants provide standalone delegation rules and invoke
 `codex-orchestration` when installed. Choose `AGENTS.with-skill.snippet.md` only
@@ -84,8 +107,8 @@ independent security sandbox.
 Copy the chosen directories from `skills/`, including each LICENSE and NOTICE,
 to the chosen skill location. The manifests list both optional skills:
 
-- `codex-orchestration`: invoke `$codex-orchestration` before bounded delegation
-  or reconciliation of worker deliveries.
+- `codex-orchestration`: invoke `$codex-orchestration` before bounded delegation,
+  coordinating ongoing work, or reconciliation of worker deliveries.
 - `pragmatic-programmer`: invoke `$pragmatic-programmer` when choosing a boundary
   or reversible first step, diagnosing unexplained success, checking duplicated
   knowledge, or handling shared state and finite resources.

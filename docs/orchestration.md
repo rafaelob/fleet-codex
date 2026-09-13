@@ -168,6 +168,76 @@ and integration risks. This restriction lives in the snippets and role instructi
 The spawn-contract hook checks arguments; it does not establish caller ancestry
 or mechanically guarantee a recursion limit.
 
+## Adaptive waiting
+
+The lead should work while useful independent work remains. When only delegated
+work remains, choose a native event-aware wait using expected duration,
+complexity, workload and meaningful progress signals, not file count alone.
+Keep this decision in the existing optional `codex-orchestration` skill; the
+insertable rules contain only a concise fallback. No new hook is required.
+
+```text
+Useful independent work? -- yes --> advance it
+           |
+           no
+           v
+Native wait --> message/result --> act on the new evidence
+           |
+           timeout --> investigation due? -- yes --> inspect a concrete signal
+                                |
+                                no --> wait again
+```
+
+Use the configured five-minute default for ordinary delegated work. A brief
+check expected to finish quickly can warrant an explicit one-minute window;
+a lengthy build or coupled implementation can warrant a longer supported window.
+These are starting points, not fixed task classes. Set a separate, task-appropriate
+point to investigate missing progress. A running status or an expired wait is
+not proof of progress, failure or a stall. Do not extend waits indefinitely when
+expected milestones are missing, or interrupt healthy work after every timeout.
+
+| Scenario | What changes |
+| --- | --- |
+| Child completes in 20 seconds | Its queued completion can end the five-minute wait early. |
+| Child works silently for eight minutes | The longer default can reduce empty returns to the parent model; it does not shorten the child's work. |
+| Parent explicitly requests 30 seconds | The one-minute floor applies; the five-minute default does not. |
+| Parent already requests five minutes | No change to that wait. |
+| Child emits frequent non-actionable messages | Messages still wake the parent; report blockers, meaningful milestones and final artifacts instead. |
+| Child stalls | A longer window can postpone detection; the independent investigation point limits this tradeoff. |
+| Parent polls a terminal or code-mode cell | Those tools have separate limits and arguments; these V2 settings do not change them. |
+
+### Context, tokens and the harness
+
+The native [wait handler](https://github.com/openai/codex/blob/dfaf451426868c22e6859f5494150fd6338c3257/codex-rs/core/src/tools/handlers/multi_agents_v2/wait.rs)
+waits on queue activity or a deadline without sampling the model inside that
+wait. Repeated short waits can nevertheless cause repeated parent model calls
+after the tool returns. Each sampling step builds input from the parent's own
+[conversation history](https://github.com/openai/codex/blob/dfaf451426868c22e6859f5494150fd6338c3257/codex-rs/core/src/session/turn.rs).
+That is not equivalent to resending all bytes every time: the
+[client](https://github.com/openai/codex/blob/dfaf451426868c22e6859f5494150fd6338c3257/codex-rs/core/src/client.rs)
+also supports incremental WebSocket requests. Logical context, transmitted bytes,
+cached input and account quota accounting must not be conflated.
+
+The parent receives explicit child communications and final-result/error notices,
+not the child's complete transcript. [Agent listing and completion monitoring](https://github.com/openai/codex/blob/dfaf451426868c22e6859f5494150fd6338c3257/codex-rs/core/src/agent/control.rs)
+read status and deliver notifications; listing does not inspect the child's
+reasoning or prove progress. `fork_turns: "none"` controls initial parent-to-child
+history inheritance, not what results come back. A child still consumes its own
+model tokens while the parent waits. Do not assume that ending the parent's turn
+guarantees a later completion notice will automatically start another turn.
+
+Active [goals can automatically continue an idle thread](https://github.com/openai/codex/blob/dfaf451426868c22e6859f5494150fd6338c3257/codex-rs/ext/goal/src/runtime.rs).
+The [empty-turn guard](https://github.com/openai/codex/blob/dfaf451426868c22e6859f5494150fd6338c3257/codex-rs/ext/goal/src/accounting.rs)
+counts text and tool calls as activity, so it does not identify every unproductive
+polling loop. Longer native waits and better instructions mitigate avoidable
+returns; they do not change that harness behavior. We have not established a
+specific local harness bug or measured a reduction in five-hour quota usage.
+Preventing every redundant automatic turn would require a separate upstream
+change and regression evidence, not a stronger claim about these settings.
+
+The source review above is pinned to 2026-09-13. See [configuration](configuration.md#native-child-wait-settings)
+for exact values and rollback, and [validation](validation.md) for what was run.
+
 ## Evidence and references
 
 ### Prompt and skill design

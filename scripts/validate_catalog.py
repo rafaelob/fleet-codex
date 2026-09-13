@@ -36,6 +36,12 @@ V2_FIELDS = {
     "tool_namespace",
     "max_concurrent_threads_per_session",
 }
+# Effective defaults in the catalog's pinned Codex V2 baseline.
+WAIT_DEFAULTS = {
+    "min_wait_timeout_ms": 10_000,
+    "default_wait_timeout_ms": 30_000,
+    "max_wait_timeout_ms": 3_600_000,
+}
 AGENT_FIELDS = {
     "default_subagent_model",
     "default_subagent_reasoning_effort",
@@ -287,7 +293,10 @@ def _validate_config(path: Path, root: Path, data: dict[str, Any], errors: list[
         if not isinstance(v2, dict):
             errors.append(f"{label}: features 'multi_agent_v2' must be a table")
         else:
-            _keys(v2, V2_FIELDS, label, "features.multi_agent_v2", errors)
+            _keys(
+                v2, V2_FIELDS | WAIT_DEFAULTS.keys(), label,
+                "features.multi_agent_v2", errors, required=V2_FIELDS,
+            )
             if v2.get("enabled") is not True:
                 errors.append(f"{label}: features.multi_agent_v2 'enabled' must be true")
             if not _text(v2.get("tool_namespace")):
@@ -299,6 +308,23 @@ def _validate_config(path: Path, root: Path, data: dict[str, Any], errors: list[
                 errors.append(
                     f"{label}: features.multi_agent_v2 "
                     "'max_concurrent_threads_per_session' must be a positive integer"
+                )
+            waits = {field: v2.get(field, default) for field, default in WAIT_DEFAULTS.items()}
+            invalid_waits = [
+                field for field, value in waits.items()
+                if type(value) is not int or not 0 <= value <= 3_600_000
+            ]
+            for field in invalid_waits:
+                errors.append(
+                    f"{label}: wait timeout '{field}' must be an integer from 0 to 3600000"
+                )
+            if not invalid_waits and not (
+                waits["min_wait_timeout_ms"]
+                <= waits["default_wait_timeout_ms"]
+                <= waits["max_wait_timeout_ms"]
+            ):
+                errors.append(
+                    f"{label}: effective wait timeouts must satisfy minimum <= default <= maximum"
                 )
 
     agents = data.get("agents")

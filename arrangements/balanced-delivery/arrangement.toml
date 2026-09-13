@@ -1,6 +1,6 @@
 schema_version = 1
 id = "balanced-delivery"
-version = "0.2.1"
+version = "0.3.0"
 author = "Rafael Bittencourt"
 description = "Balanced Delivery: Everyday product delivery with Luna implementing established patterns, Sol handling backend work and integration review, and Astra handling decisions and coupled implementation."
 license = "MIT"
