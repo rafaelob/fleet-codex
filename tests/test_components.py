@@ -91,7 +91,7 @@ class ComponentValidatorTests(unittest.TestCase):
         original_lstat = Path.lstat
         for component in ("skills", "plugins"):
             with self.subTest(component=component), tempfile.TemporaryDirectory() as temporary:
-                root = Path(temporary)
+                root = Path(temporary).resolve()
                 inaccessible = root / component
                 inaccessible.mkdir()
 
