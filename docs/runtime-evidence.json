@@ -1,0 +1,382 @@
+{
+  "schema_version": 2,
+  "observed_on": "2026-09-12",
+  "scope": "Installed Codex CLI runtime validation. A user-authorized credential file was temporarily copied into an isolated home for authenticated testing, never printed or published. The copy was removed and its absence verified in all four known isolated homes. The original credential file was not modified.",
+  "temporary_credential_copy_removed": true,
+  "installed_cli": {
+    "command": "codex.exe --version",
+    "exit_code": 0,
+    "version": "0.155.0-alpha.3.10"
+  },
+  "native_hook_name_diagnosis": {
+    "status": "pass",
+    "scenario": "A trusted diagnostic-only PreToolUse handler retained only the event name and tool name for one native spawn request.",
+    "observed": {
+      "event_name": "PreToolUse",
+      "tool_name": "agentsspawn_agent"
+    },
+    "effect": "The deployed matcher and guard allow-list include the measured flattened name. The diagnostic handler made no permission decision and was removed before acceptance probes."
+  },
+  "native_spawn_scenarios": [
+    {
+      "name": "deny_non_fresh_context",
+      "status": "pass",
+      "requested_contract": {
+        "agent_type": "hard-task-specialist",
+        "fork_turns": "all"
+      },
+      "native_tool_arguments_observed": false,
+      "observed": {
+        "root_turn_status": "completed",
+        "hook_lifecycle": [
+          "started",
+          "blocked"
+        ],
+        "hook_feedback_present": true,
+        "spawn_contract_feedback_present": true,
+        "child_count": 0,
+        "app_server_exit_code": 0
+      },
+      "meaning": "The trusted corrected PreToolUse guard intercepted the native flattened spawn tool before child creation. The requested contract is recorded separately because raw native arguments were intentionally not retained."
+    },
+    {
+      "name": "allow_hard_task_specialist_before_auth_refresh",
+      "status": "blocked_external_usage_limit",
+      "requested_contract": {
+        "agent_type": "hard-task-specialist",
+        "fork_turns": "none"
+      },
+      "native_tool_arguments_observed": false,
+      "observed": {
+        "hook_lifecycle": [
+          "started",
+          "completed"
+        ],
+        "runtime_reported_child": {
+          "agent_role": "hard-task-specialist",
+          "model": "gpt-6-astra",
+          "reasoning_effort": "high"
+        },
+        "root_turn_status": "failed",
+        "root_turn_error_class": "usageLimitExceeded",
+        "app_server_exit_code": 0
+      },
+      "meaning": "The hook allowed the request and the runtime reported the selected child role metadata, but that root did not complete."
+    },
+    {
+      "name": "lean_explorer",
+      "status": "pass",
+      "requested_contract": {
+        "agent_type": "explorer",
+        "fork_turns": "none"
+      },
+      "native_tool_arguments_observed": false,
+      "observed": {
+        "root_model": "gpt-5.6-sol",
+        "root_reasoning_effort": "high",
+        "hook_lifecycle": [
+          "started",
+          "completed"
+        ],
+        "runtime_reported_child": {
+          "agent_role": "explorer",
+          "model": "gpt-5.6-luna",
+          "reasoning_effort": "max",
+          "terminal_status": "completed"
+        },
+        "assistant_expected_token_observed": true,
+        "successful_file_read_verified": false
+      },
+      "meaning": "A native allowed role selection completed. The assistant returned the expected token, but that token was already supplied in its prompt; this is response evidence, not proof of a file read."
+    },
+    {
+      "name": "advanced_backend_worker",
+      "status": "pass",
+      "requested_contract": {
+        "agent_type": "backend-worker",
+        "fork_turns": "none"
+      },
+      "native_tool_arguments_observed": false,
+      "observed": {
+        "root_model": "gpt-5.6-sol",
+        "root_reasoning_effort": "xhigh",
+        "hook_lifecycle": [
+          "started",
+          "completed"
+        ],
+        "runtime_reported_child": {
+          "agent_role": "backend-worker",
+          "model": "gpt-5.6-terra",
+          "reasoning_effort": "max",
+          "terminal_status": "completed"
+        },
+        "assistant_expected_token_observed": true,
+        "successful_file_read_verified": false
+      },
+      "meaning": "A native allowed role selection completed. The assistant returned the expected token, but that token was already supplied in its prompt; this proves neither a file read nor a file mutation."
+    },
+    {
+      "name": "advanced_critical_reviewer",
+      "status": "pass",
+      "requested_contract": {
+        "agent_type": "critical-reviewer",
+        "fork_turns": "none"
+      },
+      "native_tool_arguments_observed": false,
+      "observed": {
+        "root_model": "gpt-5.6-sol",
+        "root_reasoning_effort": "xhigh",
+        "hook_lifecycle": [
+          "started",
+          "completed"
+        ],
+        "runtime_reported_child": {
+          "agent_role": "critical-reviewer",
+          "model": "gpt-6-astra",
+          "reasoning_effort": "high",
+          "terminal_status": "completed"
+        }
+      },
+      "meaning": "The selected reviewer role completed a bounded native role probe. It was not the independent review of the later synthetic write fixture."
+    }
+  ],
+  "fixture_response_audit": {
+    "status": "pass",
+    "method": "Assistant and non-assistant transcript records were counted separately for exact synthetic fixture tokens.",
+    "assistant_exact_token_count": 2,
+    "non_assistant_token_occurrence_count": 4,
+    "confirmed_assistant_response_roles": [
+      {
+        "agent_role": "explorer",
+        "model": "gpt-5.6-luna",
+        "reasoning_effort": "max"
+      },
+      {
+        "agent_role": "backend-worker",
+        "model": "gpt-5.6-terra",
+        "reasoning_effort": "max"
+      }
+    ],
+    "expected_token_supplied_in_prompt": true,
+    "successful_file_read_verified": false,
+    "meaning": "Two assistant responses were observed. Because their expected token was present in the prompt, matching it does not establish that either child read the fixture file."
+  },
+  "configuration_and_capacity": {
+    "lean_delivery_user_scope": {
+      "status": "pass",
+      "fresh_app_server_reload": true,
+      "role_cards_copied": 19,
+      "main_model": "gpt-5.6-sol",
+      "main_reasoning_effort": "high",
+      "v2_max_concurrent_threads_per_session": 7,
+      "trusted_pre_tool_hook": true
+    },
+    "advanced_delivery_user_scope": {
+      "status": "pass",
+      "fresh_app_server_reload": true,
+      "role_cards_copied": 19,
+      "main_model": "gpt-5.6-sol",
+      "main_reasoning_effort": "xhigh",
+      "v2_max_concurrent_threads_per_session": 6,
+      "trusted_pre_tool_hook": true
+    },
+    "project_scope_current_arrangements": {
+      "status": "pass",
+      "fixture": "Dedicated isolated Git project. Only its exact root was trusted through isolated configuration before the app-server was launched from that workspace.",
+      "fresh_config_layer_types": [
+        "project",
+        "user",
+        "system"
+      ],
+      "advanced_delivery": {
+        "fresh_app_server_reload": true,
+        "role_cards_copied": 19,
+        "main_model": "gpt-5.6-sol",
+        "main_reasoning_effort": "xhigh",
+        "v2_max_concurrent_threads_per_session": 6,
+        "trusted_pre_tool_hook_source": "project"
+      },
+      "lean_delivery": {
+        "fresh_app_server_reload": true,
+        "role_cards_copied": 19,
+        "main_model": "gpt-5.6-sol",
+        "main_reasoning_effort": "high",
+        "v2_max_concurrent_threads_per_session": 7,
+        "trusted_pre_tool_hook_source": "project"
+      },
+      "caveat": "Role-card copying and layer loading prove configuration presence only. They do not prove all 19 roles are runtime-exposed or executable."
+    },
+    "actual_concurrency_boundary": "not_run; configured values 6 and 7 are not treated as cap-enforcement evidence",
+    "release_after_child_completion": "not_run"
+  },
+  "synthetic_write_and_review": {
+    "status": "writer_artifact_pass_review_blocked_process_startup",
+    "fixture_contract": "Normalize the three supplied spacing and separator variants to one hyphenated lowercase value, then have an independent reviewer inspect the resulting change and test result.",
+    "baseline": {
+      "source_sha256": "1abc522dfffdb7bc813b8285d5d3eaeda05f1672a461681d57c6115079caebeb",
+      "test_sha256": "b3e61e7b070c37081ce9728f7a2689d2cbecd887e2f6894ec51d17b6d3e641c5",
+      "unittest_exit_code": 1,
+      "failure_class": "expected red baseline"
+    },
+    "windows_sandbox_resolution": {
+      "status": "pass",
+      "method": "No-model installed app-server thread-start probe in the isolated runtime.",
+      "requested_workspace_write_without_selector": "readOnly",
+      "with_windows_sandbox_unelevated": "workspaceWrite",
+      "with_windows_sandbox_elevated": "workspaceWrite",
+      "selected_isolated_setting": "windows.sandbox=unelevated",
+      "scope": "The selected setting applied only to the isolated fixture. Network remained disabled; no full-access flag, UAC, account, or host setting was changed."
+    },
+    "direct_app_server_attempt": {
+      "status": "inconclusive",
+      "observed": {
+        "resolved_child_sandbox": "workspace-write",
+        "elapsed_seconds_before_controller_close": 92.5,
+        "last_shell_invocation": "Get-Content <isolated-file> in <isolated-workspace>",
+        "following_tool_calls": [
+          "wait",
+          "wait",
+          "wait",
+          "wait"
+        ],
+        "child_terminal_status_after_close": "interrupted",
+        "source_changed": false,
+        "unittest_exit_code": 1
+      },
+      "harness_caveat": "The test RPC client queues unmatched inbound JSON-RPC messages but has no response path. No inbound method-plus-id record was captured. A later standalone sandbox probe reproduced the command stall without this RPC client; the bridge hypothesis is not an established cause."
+    },
+    "native_cli_attempt": {
+      "status": "blocked",
+      "method": "Fresh installed native CLI root with strict configuration, workspace-write sandbox, isolated Windows sandbox selector, JSON events, and one explicit backend-worker/fork-none request. No model override, bypass flag, or parallel app-server was used.",
+      "observed_event_categories": [
+        "thread.started",
+        "turn.started",
+        "agent_message",
+        "collab_tool_call"
+      ],
+      "spawn_call_in_cli_event_export": false,
+      "child_creation_verified_from_session_metadata": true,
+      "verified_child_count": 1,
+      "verified_child_role": "backend-worker",
+      "linkage_method": "The persisted child metadata names the CLI root as parent_thread_id and session_id, with thread_source=subagent. Empty receiver IDs in the CLI event export do not establish zero children.",
+      "child_command_progress": "The child attempted to read a triggered skill before implementation. PowerShell, no-login PowerShell and cmd.exe attempts all remained in running code-mode cells without terminal command output.",
+      "last_tool": {
+        "tool": "wait",
+        "status": "in_progress",
+        "receiver_count": 0
+      },
+      "owned_cli_process_tree": {
+        "bounded_deadline_reached": true,
+        "owned_process_exit_code": 1,
+        "post_deadline_scoped_processes": 0
+      },
+      "meaning": "The persisted session proves child creation, although the CLI event export omitted a spawn event and receiver IDs. The child stalled on command execution before editing the fixture. Only the exact process tree started for this probe was terminated."
+    },
+    "standalone_sandbox_command": {
+      "status": "blocked",
+      "method": "Installed codex sandbox -P :workspace -c windows.sandbox=unelevated -C <isolated-workspace> cmd.exe /d /c echo SANDBOX_COMMAND_OK, with a 20-second deadline.",
+      "model_turns": 0,
+      "credential_copy_present": false,
+      "app_server_or_code_mode_used": false,
+      "bounded_deadline_reached": true,
+      "stdout_empty": true,
+      "stderr_empty": true,
+      "owned_process_exit_code_after_tree_cleanup": 1,
+      "post_deadline_scoped_processes": 0,
+      "meaning": "The command stall reproduces in the standalone Windows sandbox path without a model, authentication, app-server client or code-mode cell. The underlying runner/startup cause is still unconfirmed; no sandbox bypass or host security change was attempted."
+    },
+    "temporary_directory_follow_up": {
+      "status": "pass",
+      "method": "Repeat the same no-model sandbox echo with only the child process TEMP and TMP changed to an owned empty directory before Codex starts.",
+      "sandbox_profile": ":workspace",
+      "windows_backend": "unelevated",
+      "private_desktop_setting_changed": false,
+      "security_controls_disabled": false,
+      "exit_code": 0,
+      "expected_echo_observed": true,
+      "native_start_to_success_ms": 66,
+      "original_other_io_operations_at_2s": 47020,
+      "original_other_io_operations_at_8s": 182675,
+      "isolated_other_io_operations_at_exit": 2849,
+      "host_temp_cleaned": false,
+      "user_or_machine_environment_changed": false,
+      "meaning": "Inherited temporary-directory state determines this measured startup failure. The other-I/O counts are consistent with metadata preparation, but no particular internal ACL or enumeration operation was traced. Console/bridge failure is not established as the cause. Native artifact and review acceptance must still be measured separately."
+    },
+    "post_attempt_artifact": {
+      "source_sha256": "1abc522dfffdb7bc813b8285d5d3eaeda05f1672a461681d57c6115079caebeb",
+      "test_sha256": "b3e61e7b070c37081ce9728f7a2689d2cbecd887e2f6894ec51d17b6d3e641c5",
+      "source_changed": false,
+      "test_unchanged": true,
+      "unittest_exit_code": 1
+    },
+    "native_artifact_follow_up": {
+      "status": "writer_artifact_pass_review_blocked_process_startup",
+      "method": "Two separate native CLI roots, each with an owned unique TEMP/TMP directory and a bounded owned process tree; the second root requested read-only critical review.",
+      "writer": {
+        "agent_role": "backend-worker",
+        "model": "gpt-5.6-terra",
+        "reasoning_effort": "max",
+        "parent_child_linkage_verified": true,
+        "source_sha256_after": "5709b76f4fc03a3112f4dffcf7ed2bdcf4f1e6bf4fff42be8671a880ee44ca71",
+        "test_sha256_after": "b3e61e7b070c37081ce9728f7a2689d2cbecd887e2f6894ec51d17b6d3e641c5",
+        "source_changed": true,
+        "test_unchanged": true,
+        "external_parent_unittest_exit_code": 0,
+        "external_parent_unittest_count": 1,
+        "native_root_independent_test": "blocked_process_startup"
+      },
+      "reviewer": {
+        "requested_role": "critical-reviewer",
+        "runtime_role": "critical-reviewer",
+        "runtime_model": "gpt-6-astra",
+        "runtime_reasoning_effort": "high",
+        "parent_child_linkage_verified": true,
+        "artifact_review_verified": false,
+        "native_root_test_ran": false,
+        "error": "CreateProcessAsUserW failed: -1073283067"
+      },
+      "meaning": "The native child made a real file change and an external parent verified the unchanged behavioral test passes. Both native roots later reported process-startup errors; a completed CLI turn with exit code 0 does not establish successful review or native parent testing."
+    },
+    "shell_packaging_control": {
+      "status": "store_shell_blocked",
+      "method": "No-model echo comparisons with the same workspace sandbox and unique TEMP/TMP. The sandbox and private desktop stayed enabled.",
+      "cmd_without_job": "pass",
+      "cmd_with_job": "pass",
+      "store_powershell_7_6_6_without_job": "CreateProcessAsUserW failed: -1073283067",
+      "store_powershell_7_6_6_with_job": "CreateProcessAsUserW failed: -1073283067",
+      "store_execution_alias_without_job": "CreateProcessAsUserW failed: 5",
+      "store_execution_alias_with_job": "CreateProcessAsUserW failed: 5",
+      "official_portable_powershell_7_6_6_control": "pass; packaging contrast only, not a replacement acceptance path",
+      "portable_zip_sha256": "02fe458be20493fbdf43f61ea20610b811ee6c738ab1676c61b9cfcd1a33c860",
+      "portable_executable_authenticode": "Valid; Microsoft Corporation",
+      "store_installation_changed": false,
+      "global_path_changed": false,
+      "owned_processes_remaining": 0,
+      "meaning": "The measured Store shell failure is independent of the test Job Object. The diagnostic alternate shell does not validate or replace the Store installation. No more model turns were spent on this environment failure."
+    },
+    "meaning": "The temporary-directory repair enabled a native child to edit the fixture. Independent artifact review remains blocked by a separate process-startup failure; full runtime acceptance is not claimed."
+  },
+  "rate_limit_follow_up": {
+    "status": "unavailable",
+    "error_class": "rpc_error",
+    "method": "Read-only installed app-server capability probe with reset and credit details excluded.",
+    "meaning": "No sanitizable rate-limit snapshot was returned, so no reset time or recovery estimate is claimed."
+  },
+  "not_claimed": [
+    "Exact native spawn arguments; the retained diagnostic intentionally captured only event and tool name.",
+    "Runtime exposure or execution of all 19 copied role cards.",
+    "Concurrency-cap boundary or released-slot behavior for either configured total.",
+    "Project-scope role execution.",
+    "A successful native file read from an assistant echo of a prompt-supplied token.",
+    "A successful independent native artifact review.",
+    "A confirmed inbound RPC request as the direct app-server stall cause.",
+    "A successful test command from the native writer root; the external parent test is separately verified."
+  ],
+  "reproduction_method": [
+    "Launch the installed Codex app-server in stdio mode with strict configuration and an isolated home.",
+    "Initialize the protocol, write the reviewed hook configuration, obtain its exact current hash through hooks/list, and persist trust only for that exact hook identifier and hash.",
+    "For configuration evidence, use a dedicated isolated Git workspace, trust only that root, request configuration with layers included, and launch from that workspace.",
+    "For native role evidence, make one bounded explicit native agents.spawn_agent request, retain only sanitized lifecycle and role metadata, and distinguish assistant records from prompt text.",
+    "For a writable fixture, establish the Windows sandbox resolution with a no-model thread-start probe before attempting a bounded native child operation."
+  ]
+}

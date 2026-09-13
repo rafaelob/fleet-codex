@@ -1,0 +1,16 @@
+schema_version = 1
+id = "advanced-delivery"
+version = "0.1.0"
+author = "Rafael Bittencourt"
+description = "Advanced Delivery: a public Codex Multi-Agent V2 arrangement for higher-complexity delivery."
+license = "MIT"
+codex_version = "0.155.0-alpha.3.10"
+config = "config.toml"
+agents = "agents"
+instructions = "AGENTS.snippet.md"
+instructions_with_skill = "AGENTS.with-skill.snippet.md"
+optional_skills = [
+  "../../skills/codex-orchestration",
+  "../../skills/pragmatic-programmer",
+]
+optional_hook = "../../hooks/spawn-contract"

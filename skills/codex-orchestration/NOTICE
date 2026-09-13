@@ -1,0 +1,7 @@
+Codex Orchestration
+Copyright 2026 Rafael Bittencourt
+
+This public skill adapts general task-routing workflow concepts from Rafael
+Bittencourt's prior orchestration work. It is a self-contained adaptation and
+does not include internal infrastructure, local configuration, or operational
+data.

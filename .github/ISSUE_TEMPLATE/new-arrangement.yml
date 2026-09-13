@@ -1,0 +1,30 @@
+name: New arrangement
+description: Propose a new lead and subagent combination.
+title: "[Arrangement]: "
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Purpose and audience
+      description: What work does the arrangement serve, and how does it differ from existing options?
+    validations:
+      required: true
+  - type: textarea
+    id: allocation
+    attributes:
+      label: Proposed allocation
+      description: Describe the lead, specialist roles, model and effort choices, and suggested concurrency.
+    validations:
+      required: true
+  - type: textarea
+    id: components
+    attributes:
+      label: Optional components and licensing
+      description: Identify proposed public skills or hooks, their sources and licenses. Do not include personal configuration or credentials.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Compatibility and evidence
+      description: Give the Codex version, platform and sanitized observations. State clearly what has not yet been tested.
+    validations:
+      required: true
