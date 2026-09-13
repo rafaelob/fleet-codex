@@ -11,7 +11,7 @@ third-party orchestration service to use these files.
 [Skills](skills/README.md) · [Plugins](plugins/README.md) ·
 [Validation and compatibility](docs/validation.md)
 
-Version 0.2.0 is a community preview. Historical hook and selected-role tests are
+Version 0.2.1 is a community preview. Historical hook and selected-role tests are
 recorded; the revised allocations and caps are not fully runtime-certified.
 
 ## Choose an arrangement

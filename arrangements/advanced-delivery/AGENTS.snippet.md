@@ -1,34 +1,18 @@
-## Multi-Agent V2 orchestration
+## Delegation and orchestration
 
-### Routing
+### Role selection
 
-Delegate only a bounded task with an independent result.
-Inspect relevant live role descriptions and the current spawn schema; `list_agents` shows the running tree, not a role catalog.
-Match an available role and its resolved allocation to read-only discovery, research, decision, or review; a bounded known artifact; unknown-cause diagnosis; coupled invariants; or integration review.
-Use the least resource-intensive safe role; do not give edits to a read-only role.
-Luna workers may implement established patterns; model allocation does not change a role's mandate.
-Reserve Sol for backend implementation, unknown-cause diagnosis, ordinary review, and integration review; reserve Astra for advice, design direction, coupled implementation, and critical review.
-
-### Responsibilities
-
-Regular backend/frontend workers also handle fully specified small edits. The parent writes documentation; critical-reviewer handles scoped security review. Light variants and a separate security sweep are omitted.
+- Before delegating or reconciling deliveries, invoke the Skill tool with `codex-orchestration` when installed. If no Skill tool exists, read its `SKILL.md` through the native file-reading interface. If the skill is not installed, follow the rules below.
+- Read the relevant live role descriptions and instructions; choose the least resource-intensive role suited to the task and required artifact. Read-only roles never receive implementation work. `list_agents` shows running children, not available roles.
 
 ### Dispatch contract
 
-The parent owns selection, integration, validation, and outcome; children never spawn children.
-Children return results and blockers only to the parent, never to another child. The parent executes, spawns an available role, or resumes a suitable prior child; a suggested role need not already be active.
-Every spawn explicitly sets `agent_type` and `fork_turns: "none"` and omits call-level model and reasoning-effort overrides.
-The brief contains only relevant context, accepted decisions, and any relevant plan; outcome and acceptance criterion; in/out scope and ownership; interfaces and access constraints; expected artifact and checks; and stop conditions plus next consumer.
-It needs neither a separate plan document nor a history dump.
+- Only the parent delegates. Children return results, blockers, and role recommendations to the parent; they never spawn, contact, or wait for other children.
+- Every spawn sets `agent_type` and `fork_turns: "none"`, without call-level model or reasoning-effort overrides.
+- Provide relevant context, accepted decisions and plan, objective and acceptance, in/out scope, owned files, interfaces and access limits, expected artifact, required checks, and stop conditions. Do not copy the full conversation or create a plan solely for dispatch.
 
-### Ownership and evidence
+### Ownership and return
 
-Keep writing ownership non-overlapping; serialize shared files, state, and interacting contracts.
-`send_message` only queues a message; `followup_task` starts a completed child on a new turn with its history.
-Stop or redirect a child that lacks evidence, exceeds its brief, repeats failure, or conflicts with owned work.
-Only the parent integrates, inspects the diff, and verifies responsible checks; skipped, unavailable, or mocked required checks block acceptance.
-
-### Capacity
-
-This fragment configures 5 total session threads, including the parent; use at most 4 simultaneous children. Start with one useful child, not a full roster.
-See [runtime validation](https://github.com/rafaelob/fleet-codex/blob/main/docs/validation.md) for environment-specific verification. A refused spawn does not justify idling while independent local work remains.
+- Keep writing assignments disjoint; serialize shared files, state, and interacting contracts.
+- Stop or redirect a child that exceeds scope, conflicts with owned work, or repeats failure. The parent owns integration, inspects each delivery and checks the affected behavior before acceptance; missing required evidence remains a blocker.
+- Use `followup_task` to resume a suitable completed child; `send_message` only queues a message. A recommended role need not already be running.

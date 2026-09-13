@@ -1,41 +1,25 @@
-## Multi-Agent V2 orchestration
+## Delegation and orchestration
 
-Optional skills can be installed independently. Use the fallback in the relevant section when one is absent; do not invent a callable Skill API on Codex CLI.
+### Role selection
 
-### Routing
-
-For dispatch, call the runtime's Skill tool with `codex-orchestration` when exposed; otherwise use its native skill-loading interface to read `SKILL.md`. In Codex prompts, use `$codex-orchestration`.
-If it is absent, inspect relevant live role descriptions and the current spawn schema; `list_agents` shows the running tree, not a role catalog.
-Match an available role and its resolved allocation to read-only discovery, research, decision, or review; a bounded known artifact; unknown-cause diagnosis; coupled invariants; or integration review.
-Use the least resource-intensive safe role; do not give edits to a read-only role.
-Luna workers may implement established patterns; model allocation does not change a role's mandate.
-Use at most one active `advisor` and one active `integrator-reviewer`; other child roles use Luna. An advisor remains read-only and is not an implementation fallback. If coupling or risk exceeds the available implementing or reviewing role, return to the parent; do not weaken acceptance.
-
-### Responsibilities
-
-Backend/frontend workers handle small edits and write and run their own regression tests. Advisor supplies design direction but never implements. The parent owns documentation, standalone test execution, database and infrastructure work, and coupled or unknown-cause implementation; request separately qualified help when these exceed the parent's scope or capability. Critical-reviewer handles security review; never downgrade the required evidence.
+- Before delegating or reconciling deliveries, invoke the Skill tool with `codex-orchestration` when installed. If no Skill tool exists, read its `SKILL.md` through the native file-reading interface. If the skill is not installed, follow the rules below.
+- Read the relevant live role descriptions and instructions; choose the least resource-intensive role suited to the task and required artifact. Read-only roles never receive implementation work. `list_agents` shows running children, not available roles.
 
 ### Dispatch contract
 
-The parent owns selection, integration, validation, and outcome; children never spawn children.
-Children return results and blockers only to the parent, never to another child. The parent executes, spawns an available role, or resumes a suitable prior child; a suggested role need not already be active.
-Every spawn explicitly sets `agent_type` and `fork_turns: "none"` and omits call-level model and reasoning-effort overrides.
-The brief contains only relevant context, accepted decisions, and any relevant plan; outcome and acceptance criterion; in/out scope and ownership; interfaces and access constraints; expected artifact and checks; and stop conditions plus next consumer.
-It needs neither a separate plan document nor a history dump.
+- Only the parent delegates. Children return results, blockers, and role recommendations to the parent; they never spawn, contact, or wait for other children.
+- Every spawn sets `agent_type` and `fork_turns: "none"`, without call-level model or reasoning-effort overrides.
+- Provide relevant context, accepted decisions and plan, objective and acceptance, in/out scope, owned files, interfaces and access limits, expected artifact, required checks, and stop conditions. Do not copy the full conversation or create a plan solely for dispatch.
 
-### Ownership and evidence
+### Ownership and return
 
-Keep writing ownership non-overlapping; serialize shared files, state, and interacting contracts.
-`send_message` only queues a message; `followup_task` starts a completed child on a new turn with its history.
-Stop or redirect a child that lacks evidence, exceeds its brief, repeats failure, or conflicts with owned work.
-Only the parent integrates, inspects the diff, and verifies responsible checks; skipped, unavailable, or mocked required checks block acceptance.
+- Keep writing assignments disjoint; serialize shared files, state, and interacting contracts.
+- Stop or redirect a child that exceeds scope, conflicts with owned work, or repeats failure. The parent owns integration, inspects each delivery and checks the affected behavior before acceptance; missing required evidence remains a blocker.
+- Use `followup_task` to resume a suitable completed child; `send_message` only queues a message. A recommended role need not already be running.
 
-### Optional engineering guidance
+## Engineering decisions
 
-For an ambiguous design or boundary, unexplained green result, duplicate knowledge, contract/input change, reversible-step or spike choice, or shared finite resource, call the Skill tool with `pragmatic-programmer` when exposed; otherwise load its `SKILL.md` natively. In Codex prompts, use `$pragmatic-programmer`.
-If it is absent, explain the green signal, name one knowledge authority, validate the boundary and invariants, choose a reversible next step, identify resource ownership and release, and distinguish impossible states from operational errors.
+### Pragmatic Programmer
 
-### Capacity
-
-This fragment configures 3 total session threads, including the parent; use at most 2 simultaneous children. Start with one useful child, not a full roster.
-See [runtime validation](https://github.com/rafaelob/fleet-codex/blob/main/docs/validation.md) for environment-specific verification. A refused spawn does not justify idling while independent local work remains.
+- For design tradeoffs, unclear boundaries, duplicate knowledge, an unexplained green result, or a reversible next step, invoke the Skill tool with `pragmatic-programmer` when installed. If no Skill tool exists, read its `SKILL.md` natively.
+- If it is not installed, state the assumptions and invariants, keep one authority per fact, explain why the result works, and choose the smallest reversible step. Do not invent tools or install skills implicitly.

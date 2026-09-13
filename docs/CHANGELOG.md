@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 — 2026-09-13
+
+- Keep insertable delegation rules concise: remove roster counts, concurrency
+  figures, model-allocation summaries, and runtime-evidence links from snippets.
+- Invoke the optional orchestration skill with a native-reading fallback; keep
+  optional Pragmatic Programmer guidance in a separate engineering section.
+
 ## 0.2.0 — 2026-09-13
 
 - Add Balanced Delivery for everyday product work: two Astra roles, two Sol roles,

@@ -27,6 +27,12 @@ never restore a whole home over newer credentials or unrelated configuration.
 
 ## Choose a scope
 
+Both snippet variants provide standalone delegation rules and invoke
+`codex-orchestration` when installed. Choose `AGENTS.with-skill.snippet.md` only
+when you also want the separate, optional Pragmatic Programmer engineering
+section. Counts, model allocation and runtime evidence belong in the arrangement
+README and configuration, not the inserted instruction section.
+
 | Component | User scope | Project scope |
 | --- | --- | --- |
 | Configuration | `$CODEX_HOME/config.toml` (normally `~/.codex/config.toml`) | `<project>/.codex/config.toml` |
