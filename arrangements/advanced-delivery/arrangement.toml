@@ -1,6 +1,6 @@
 schema_version = 1
 id = "advanced-delivery"
-version = "0.2.0"
+version = "0.2.1"
 author = "Rafael Bittencourt"
 description = "Advanced Delivery: Complex product delivery with dedicated reasoning for decisions, diagnosis, ordinary review, critical review, and coupled implementation."
 license = "MIT"
