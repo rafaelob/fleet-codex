@@ -1,0 +1,35 @@
+name: New workflow component
+description: Propose an independent skill, plugin or hook for community reuse.
+title: "[Component]: "
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Component type
+      options:
+        - Skill
+        - Plugin
+        - Hook
+    validations:
+      required: true
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Workflow and value
+      description: Explain the situations this component helps, its boundaries and existing alternatives.
+    validations:
+      required: true
+  - type: textarea
+    id: packaging
+    attributes:
+      label: Package and access
+      description: Describe the format, bundled capabilities, license, dependencies, permissions and external data flow. No credentials or private endpoints.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Validation and installation evidence
+      description: Include the exact runtime version, platform and sanitized results, or explicitly identify what is not tested yet.
+    validations:
+      required: true

@@ -1,0 +1,30 @@
+name: Correction or bug
+description: Report a problem or suggest a correction to an existing arrangement or tool.
+title: "[Correction]: "
+body:
+  - type: input
+    id: component
+    attributes:
+      label: Arrangement or component
+      description: For example Advanced Delivery, Lean Delivery, a skill, plugin, spawn hook or installation guide.
+    validations:
+      required: true
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Current and expected behavior
+      description: Explain what happens now and what should happen instead.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction and environment
+      description: Include the exact Codex version, platform and minimal reproduction. Remove credentials, personal paths and private project content.
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Suggested correction
+      description: If known, describe a fix or link an existing pull request.

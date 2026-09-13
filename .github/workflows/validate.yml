@@ -1,0 +1,29 @@
+name: Validate catalog
+
+on:
+  pull_request:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Python ${{ matrix.python }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ["3.11", "3.14"]
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Validate catalog
+        run: python -X utf8 scripts/validate_catalog.py
+      - name: Validate reusable components
+        run: python -X utf8 scripts/validate_components.py
+      - name: Run behavioral tests
+        run: python -X utf8 -m unittest discover -s tests -v

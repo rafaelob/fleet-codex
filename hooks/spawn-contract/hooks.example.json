@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^(Agent|spawn_agent|agents\\.spawn_agent|functions\\.spawn_agent|agentsspawn_agent)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -X utf8 /ABSOLUTE/PATH/spawn-contract/guard.py",
+            "timeout": 5
+          }
+        ]
+      }
+    ]
+  }
+}
