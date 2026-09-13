@@ -11,9 +11,15 @@ instead of loading them into every conversation.
 advice, coupled implementation and critical review. Use it when uncertainty and
 business impact justify more reasoning across several responsibilities.
 
+**Balanced Delivery** is the middle ground for everyday product delivery: Astra
+handles advice and coupled implementation; Sol handles backend implementation and
+integration review. Luna handles the other responsibilities, including independent
+critical review. A role name never proves adequate review depth: unresolved risk
+must go back to the parent, not be waived because the designated reviewer ran.
+
 **Lean Delivery** concentrates the same responsibilities on lighter models. Use
 it for well-defined work where spending on every specialist is less useful. Its
-integration reviewer uses Sol `high`; its critical reviewer uses Astra `high`.
+integration reviewer uses Sol `high`; its decision advisor uses Astra `high`.
 All other specialists, including backend and frontend workers, use Luna `max`.
 This keeps the expensive specialist allocation narrow while retaining a dedicated
 cross-delivery integration review. The lead is separate from these child counts.
@@ -25,6 +31,47 @@ little about complexity: a small authorization change can carry more risk than a
 large mechanical update. A role that requires repeated correction can cost more
 than a stronger role completing the work once. These are design tradeoffs;
 this catalog does not publish an unmeasured price ranking or savings percentage.
+
+## Smaller catalogs and active teams
+
+Advanced exposes 15 roles, Balanced 12, and Lean 8. Their retained roles follow
+the same task-based allocation, but removed responsibilities have explicit owners:
+
+| Removed specialization | Advanced | Balanced | Lean |
+| --- | --- | --- | --- |
+| Light backend/frontend variants | Regular worker | Regular worker | Regular worker |
+| Documentation writer | Parent | Parent | Parent |
+| Security sweep | Critical reviewer | Critical reviewer | Critical reviewer |
+| Separate design direction | Design lead retained | Advisor | Advisor |
+| Unknown-cause diagnosis | Debugger retained | Hard-task specialist | Parent |
+| Separate test author | Test engineer retained | Owning worker | Owning worker |
+| Coupled implementation, database, infrastructure | Dedicated roles retained | Dedicated roles retained | Parent or separately qualified help |
+| Separate test runner | Retained | Retained | Parent; workers run their own checks |
+
+Implementation and independent review remain separate even in Lean. An absent
+specialist is not permission to lower acceptance or move irreversible work into
+an underqualified role. These are public adaptations, not whole-home exports.
+
+Advanced permits four active children, Balanced three, and Lean two
+(total-thread caps of five, four, and three including the lead). Start with one
+useful child. Advanced leaves room for disjoint implementation and investigation;
+Balanced supports two implementation fronts and a bounded check; Lean favors a
+short implementation-then-review sequence. Review the combined artifact after
+the writers finish; these examples are not mandatory phases or reserved slots.
+
+The names describe intended delivery complexity and resource allocation, not
+subscriptions or measured savings. The smaller public caps are deliberate
+adaptations, not copies of a personal installation and not benchmark optima.
+No local comparative benchmark establishes superiority of these topologies.
+
+## Parent-mediated routing only
+
+A child returns its result or blocker to the parent, optionally recommending a
+role. It never contacts, waits for, or dispatches another child. Role references
+in descriptions help the parent choose work; they are not a network of agents
+that must already be running. The parent performs the work directly, spawns an
+available role with a complete brief, or resumes a suitable completed child with
+`followup_task`. Review waits for the actual artifact, not a promised delivery.
 
 ## Why `fork_turns: "none"`
 

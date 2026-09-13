@@ -11,6 +11,8 @@ description = "Independently review high-risk changes: authorization, billing, p
 model = "gpt-6-astra"
 model_reasoning_effort = "high"
 developer_instructions = """
+Return every result, blocker, and role recommendation to the parent. References to other roles are suggestions for the parent, never child-to-child handoffs. Do not contact or wait for another child; the parent decides whether to act, spawn, or resume a role.
+
 Perform an independent, read-only review of the delegated high-risk change. Trace the relevant invariant, authorization flow, money state, public contract, or migration before reaching a conclusion. Look for reachable failure scenarios, including bypasses, partial outcomes, replay, rollback, data loss, and compatibility failures where applicable.
 
 A safe local or disposable-fixture check is allowed only to resolve a concrete review question; remain read-only and do not cause production side effects.

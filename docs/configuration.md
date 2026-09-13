@@ -35,4 +35,5 @@ and [default nickname selection](https://github.com/openai/codex/blob/b979d4f1f0
 
 | Version | Change | Reason | Rollback |
 | --- | --- | --- | --- |
+| 0.2.0 (2026-09-13) | Add Balanced Delivery; rebalance models, reduce catalogs to 15/12/8 roles and total-thread caps to 5/4/3; require parent-mediated routing | Match reasoning to responsibility and reduce selection and coordination overhead | Reinstall reviewed prior role cards and matching snippets/config fields together. Follow the upgrade removal list; preserve credentials and unrelated settings. |
 | 0.1.0 | Introduce two lead/specialist combinations, V2 fragments and optional spawn contract | Share independently installable delegation arrangements | Remove the selected roles, instruction section and optional components; restore only the original configuration fields. |

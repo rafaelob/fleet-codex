@@ -44,9 +44,13 @@ Model names and reasoning efforts are explicit in each TOML; availability depend
 on the installing account and runtime. An unavailable model is an error to resolve,
 not permission to substitute a different model silently.
 
-The fragments set `features.multi_agent_v2.max_concurrent_threads_per_session`
-to 6 and 7. The target binary's prompt-input output confirms those are total
+The 0.1.0 fragments set `features.multi_agent_v2.max_concurrent_threads_per_session`
+to 6 and 7. That revision's target-binary prompt-input output confirmed total
 slots including the lead: at most 5 and 6 concurrent children, respectively.
+Revision 0.2.0 deliberately sets Advanced/Balanced/Lean to 5/4/3 total threads,
+with intended child limits of 4/3/2. Those revised values and role allocations
+have not been exercised in a new native saturation or complete role-coverage run.
+Do not treat the historical writer or hook runs as certification of the new matrix.
 The legacy `agents.max_concurrent_threads_per_session` is a child cap; this
 binary adds one when translating it into a V2 total. Mixing the two settings
 would misstate capacity. The [pinned configuration resolver](https://github.com/openai/codex/blob/b979d4f1f04538ba5a5fcc434d499c007bfe1b8c/codex-rs/core/src/config/mod.rs#L2500)

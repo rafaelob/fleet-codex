@@ -5,6 +5,26 @@ the [validation record](validation.md); these packages target Multi-Agent V2 and
 do not silently fall back to V1. You need access to the named models. Python 3.11+
 is needed only for the optional hook and local validation.
 
+## Upgrading from 0.1.0
+
+Copying a smaller roster over the old directory does not remove obsolete cards.
+Back up only the arrangement files you installed and identify which cards are
+yours; never clear the entire agents directory or Codex home.
+
+- Advanced removes `backend-worker-light.toml`, `frontend-worker-light.toml`,
+  `docs-writer.toml`, and `security-sweep.toml`.
+- Lean removes those four plus `design-lead.toml`, `debugger.toml`,
+  `test-engineer.toml`, `hard-task-specialist.toml`, `database-engineer.toml`,
+  `infra-sre.toml`, and `test-runner.toml`.
+- Balanced is new. When switching arrangements, compare its listed cards to your
+  installed set and remove only confirmed obsolete arrangement cards.
+
+Move removed cards outside every loaded agents directory, preserving your own
+custom roles. Install the selected roster and its matching instruction and
+configuration fragments. A card left in a loaded directory remains available.
+For rollback, restore prior arrangement cards and matching fragments together;
+never restore a whole home over newer credentials or unrelated configuration.
+
 ## Choose a scope
 
 | Component | User scope | Project scope |
@@ -34,7 +54,7 @@ override your selection, and same-named agents can shadow other definitions.
    differently by this runtime. Do not copy that legacy cap into this fragment.
 3. Copy the chosen arrangement's `agents/*.toml` into the destination `agents/`
    directory. Review every name collision before replacing a file. Do not combine
-   these two arrangements' same-named roles in one scope.
+   different arrangements' same-named roles in one scope.
 4. Insert the content of `AGENTS.snippet.md` into the appropriate AGENTS.md, without
    replacing its other instructions. If an AGENTS.override.md is active at that
    scope, reconcile with it: a lower-priority file may not be loaded.

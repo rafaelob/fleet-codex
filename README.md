@@ -11,25 +11,27 @@ third-party orchestration service to use these files.
 [Skills](skills/README.md) · [Plugins](plugins/README.md) ·
 [Validation and compatibility](docs/validation.md)
 
-Version 0.1.0 is a community preview. Real hook and selected-role tests are
-recorded; full runtime coverage, including concurrency saturation, is not claimed.
+Version 0.2.0 is a community preview. Historical hook and selected-role tests are
+recorded; the revised allocations and caps are not fully runtime-certified.
 
 ## Choose an arrangement
 
 | Arrangement | Lead | Specialist allocation | Configured cap / recommended active children |
 | --- | --- | --- | --- |
-| [Advanced Delivery](arrangements/advanced-delivery/README.md) | `gpt-5.6-sol`, `xhigh` | 4 Astra, 9 Terra, 6 Luna | 6 / up to 5 |
-| [Lean Delivery](arrangements/lean-delivery/README.md) | `gpt-5.6-sol`, `high` | 1 Astra, 1 Sol, 17 Luna | 7 / up to 6 |
+| [Advanced Delivery](arrangements/advanced-delivery/README.md) | `gpt-5.6-sol`, `xhigh` | 15 roles: 4 Astra, 4 Sol, 7 Luna | 5 / up to 4 |
+| [Balanced Delivery](arrangements/balanced-delivery/README.md) | `gpt-5.6-sol`, `xhigh` | 12 roles: 2 Astra, 2 Sol, 8 Luna | 4 / up to 3 |
+| [Lean Delivery](arrangements/lean-delivery/README.md) | `gpt-5.6-sol`, `high` | 8 roles: 1 Astra, 1 Sol, 6 Luna | 3 / up to 2 |
 
-Both arrangements provide the same 19 roles and enable Multi-Agent V2. Roles
-are available choices, not 19 agents started together. Allocate only useful,
+The three arrangements provide progressively smaller role catalogs and enable
+Multi-Agent V2. Roles are available choices, not agents started together. Allocate only useful,
 independent work; parallel calls consume additional model tokens.
 
 Advanced Delivery targets complex product work and spends more of its model
 allocation on design, advice, critical review and coupled implementation.
-Lean Delivery targets cost-conscious delivery on well-defined work: it uses Luna
-broadly, keeps Astra for critical review, and uses Sol `high` to review integration
-across deliveries. Backend and frontend implementation use Luna. If ambiguity or business risk exceeds the selected
+Balanced Delivery reserves Astra for advice and coupled implementation, and Sol
+for backend implementation and integration review. Lean Delivery uses Luna
+broadly, keeps Astra for read-only advice, and uses Sol `high` to review integration
+across deliveries. Lean backend and frontend implementation use Luna. If ambiguity or business risk exceeds the selected
 role's capability, the lead reassesses the assignment before continuing.
 These are routing objectives, not measured cost or quality guarantees; total
 cost also depends on task length, retries and parallelism.
@@ -72,7 +74,7 @@ guides are welcome. See the [changelog](docs/CHANGELOG.md) for published changes
 
 ## Share reusable workflow components
 
-Components live outside the arrangements so they can serve either arrangement,
+Components live outside the arrangements so they can serve any arrangement,
 another community combination, or an existing workflow:
 
 - [skills/](skills/README.md): standalone, optional skills, including

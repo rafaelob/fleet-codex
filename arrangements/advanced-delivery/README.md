@@ -1,49 +1,47 @@
 # Advanced Delivery
 
-Advanced Delivery is a public Codex Multi-Agent V2 arrangement for work whose delivery complexity warrants a specialist role map: coupled invariants, cross-component changes, independent review, and investigation with conflicting evidence. Its main session uses `gpt-5.6-sol` at `xhigh` reasoning effort; each role below is pinned independently.
+Complex product delivery with dedicated reasoning for decisions, diagnosis, ordinary review, critical review, and coupled implementation. The lead uses `gpt-5.6-sol` at `xhigh`. This is an allocation policy, not a measured quality or cost guarantee.
 
-## Contents
+## Install
 
-- `config.toml` enables Multi-Agent V2 with the `agents` tool namespace.
-- `agents/` contains the 19 role cards.
-- `AGENTS.snippet.md` is self-contained orchestration guidance.
-- `AGENTS.with-skill.snippet.md` optionally uses `codex-orchestration` and `pragmatic-programmer`, with a standalone fallback.
-- `arrangement.toml` describes this arrangement and its optional hook and skills.
-
-Follow the repository [installation guide](../../docs/installation.md) to install an arrangement. This arrangement has no executable dependencies.
+Follow the [installation guide](../../docs/installation.md). Merge only `config.toml`, install the 15 `agents/*.toml` cards, and insert either `AGENTS.snippet.md` or the optional-skill variant. The manifest references independent, optional skills and a hook; none is automatically enabled. No private tools or configuration are required.
 
 ## Routing
 
-Classify the task first, then select the least resource-intensive available role that can safely produce the required artifact after checking its current resolved allocation. This arrangement prioritizes delivery complexity over a lean allocation: light workers handle fully specified small edits, ordinary workers handle bounded work on established patterns, and specialist roles are reserved for coupled invariants, unknown causes, and independent review. It makes no measured price or quality claim.
+Read the live role's description, instructions, resolved model and effort before dispatch. Match the artifact and task difficulty, not the role name alone. Luna is an implementation model for established patterns, not just a reconnaissance option. Keep implementation, advice, and independent review separate.
+
+Reserve Sol for backend implementation, unknown-cause diagnosis, ordinary review, and integration review; reserve Astra for advice, design direction, coupled implementation, and critical review.
 
 | Role | Model | Reasoning effort |
 | --- | --- | --- |
 | advisor | gpt-6-astra | high |
-| backend-worker-light | gpt-5.6-luna | max |
-| backend-worker | gpt-5.6-terra | max |
-| code-reviewer | gpt-5.6-terra | max |
+| backend-worker | gpt-5.6-sol | high |
+| code-reviewer | gpt-5.6-sol | high |
 | critical-reviewer | gpt-6-astra | high |
-| database-engineer | gpt-5.6-terra | max |
-| debugger | gpt-5.6-terra | max |
+| database-engineer | gpt-5.6-luna | max |
+| debugger | gpt-5.6-sol | high |
 | design-lead | gpt-6-astra | high |
-| docs-writer | gpt-5.6-luna | max |
 | explorer | gpt-5.6-luna | max |
-| frontend-worker-light | gpt-5.6-luna | max |
-| frontend-worker | gpt-5.6-terra | max |
+| frontend-worker | gpt-5.6-luna | max |
 | hard-task-specialist | gpt-6-astra | high |
-| infra-sre | gpt-5.6-terra | max |
-| integrator-reviewer | gpt-5.6-terra | max |
+| infra-sre | gpt-5.6-luna | max |
+| integrator-reviewer | gpt-5.6-sol | high |
 | researcher | gpt-5.6-luna | max |
-| security-sweep | gpt-5.6-terra | max |
-| test-engineer | gpt-5.6-terra | max |
+| test-engineer | gpt-5.6-luna | max |
 | test-runner | gpt-5.6-luna | max |
 
-Before spawning, inspect the runtime's live role description and exposed spawn schema; use only a currently available role with its current resolved model and reasoning effort. A running-agent listing is not a role catalog. Spawn a selected card with explicit `agent_type` and `fork_turns: "none"`; do not set a model or reasoning effort on the spawn call. Give the child a bounded brief, keep writing assignments non-overlapping, and have the parent inspect every delivery and verify its evidence.
+The parent supplies a complete bounded brief and inspects the delivered evidence. Every spawn uses `agent_type` and `fork_turns: "none"`, with no call-level model or effort override. Children never spawn children.
 
-## Capacity
+## Capacity and simplicity
 
-The configuration sets `features.multi_agent_v2.max_concurrent_threads_per_session = 6`: six total slots including the lead in the target binary's resolved instructions. Use no more than 5 simultaneous children. Live saturation and slot release are separate checks in the [validation record](../../docs/validation.md). Continue independent local work when a spawn is refused.
+The V2 fragment sets **5 total threads including the lead**, allowing **at most 4 simultaneous children** in the target runtime. Start with one useful delegation and add another only for a disjoint result. Reconcile an implementation batch before starting another; do not fill the cap by routine.
+
+The 15 role cards are available responsibilities, not 15 running agents. Removed roles have explicit owners:
+
+Regular backend/frontend workers also handle fully specified small edits. The parent writes documentation; critical-reviewer handles scoped security review. Light variants and a separate security sweep are omitted.
+
+This is an adapted public roster, not a full personal-profile export. Retained roles preserve the task-based model allocation. Conservative caps are design choices, not benchmark-derived optima; see [the rationale](../../docs/orchestration.md).
 
 ## Validation status
 
-This catalog makes no claim of completed runtime validation. Validate the installed arrangement against the Codex version named in `arrangement.toml` before relying on it in production work.
+Revision 0.2.0 changes allocations and caps. Historical native tests from 0.1.0 do not certify this revision. Full live role coverage, concurrency saturation, and slot release remain unverified; see [the validation record](../../docs/validation.md). Installation still requires account/model availability and compatible runtime checks.
