@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 — 2026-09-20
+
+- Lower Advanced Delivery's total-thread cap from five to four, matching
+  Balanced Delivery's four (three active children each); Lean is unchanged at
+  three total, two active.
+- Rewrite the shared `codex-orchestration` skill and every arrangement's AGENTS
+  snippets around bounded, single-mission delegation: an accepted delivery
+  closes the child's mission, a follow-up only corrects or clarifies that same
+  delivery, a finished child is never reused for new work, and a child is never
+  woken to ask for status or an acknowledgement.
+- Configuration and instruction change only; not exercised in a new native
+  concurrency or saturation run.
+
 ## 0.3.0 — 2026-09-13
 
 - Set native child waits to a one-minute minimum and five-minute default in all

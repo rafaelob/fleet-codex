@@ -16,7 +16,7 @@ Before dispatch, inspect only the relevant live role descriptions and exposed sp
 
 Match the task type to a currently available role: use a read-only specialist for discovery, primary-source research, decisions, or independent review; an implementing role for a bounded known artifact; a test specialist for a coverage or named-suite need; a debugger for an unknown cause; a stronger specialist for coupled invariants; and an integration reviewer to synthesize separate deliveries against one contract. These are routing examples, not a static role catalog.
 
-Select the least resource-intensive available role that can safely deliver the artifact. Do not assume a universal cost or capability order from role names or model labels. Use a light worker only when behavior, files, validation, and ownership are already clear. If demonstrated coupling or risk exceeds an available role, return the choice to the parent for a stronger available role or a decision. A read-only role assigned a write task must report the mismatch and stop.
+Select the least resource-intensive available role that can safely deliver the artifact, and escalate only on demonstrated difficulty, never on task size or file count. Do not assume a universal cost or capability order from role names or model labels. Use a light worker only when behavior, files, validation, and ownership are already clear. If demonstrated coupling or risk exceeds an available role, return the choice to the parent for a stronger available role or a decision. A read-only role assigned a write task must report the mismatch and stop.
 
 ## Spawn contract
 
@@ -31,13 +31,15 @@ Every brief must include:
 5. Expected artifact and checks to run.
 6. Stop condition, escalation path, and next consumer.
 
+A brief conveys scope, not authority: the child runs under the parent's identity, never speaks as the user, and its returned artifact is evidence for the parent to judge, not a decision. Every mission is bounded: the child delivers that artifact with its evidence, then stops.
+
 Use an action verb that matches the needed result: inspect, implement, test, review, or research. Ask for a diff when a diff is wanted; ask for a report when the child must remain read-only.
 
 ## Child lifecycle and capacity
 
-`send_message` queues a message for an existing child but does not start or resume its turn. Use `followup_task` to give a completed child a new turn while preserving its history.
+`send_message` queues a message for an existing child but does not start or resume its turn. Acceptance closes a child's mission: use `followup_task` only to correct or clarify that same delivery, never to reuse a finished child for new work merely because it already knows the project. New work is a fresh choice between doing it directly or dispatching a new child.
 
-Respect the chosen arrangement's allocation, per-role limits, and configured cap, then confirm the current runtime's resolved limits. A refused spawn is not a reason to idle: continue independent local work and wait only when nothing remains to advance.
+Respect the chosen arrangement's allocation, per-role limits, and configured cap; treat the cap as a ceiling, never a target, and dispatch only work that pays for its own brief and review. Confirm the current runtime's resolved limits. A refused spawn is not a reason to idle: continue independent local work and wait only when nothing remains to advance.
 
 ## Wait according to the task
 
@@ -45,7 +47,7 @@ If useful independent work remains, do it. Otherwise, use the native event-aware
 
 Set a task-appropriate point for investigating missing progress, separate from the wait window. A timeout means no event arrived within that window; a running status does not establish progress. When the investigation point is reached, inspect the relevant status or artifact and ask one focused question if needed; do not endlessly extend waits or interrupt healthy work merely because one window expired.
 
-Children should report actionable blockers, meaningful milestones, and their final artifact, not periodic messages saying they are still working. The parent receives those communications, not the child's complete transcript. On wake, use the new evidence; query status only when it answers a concrete coordination or diagnostic question.
+Children should report actionable blockers, meaningful milestones, and their final artifact, not periodic messages saying they are still working. Never wake a child only to ask for status or an acknowledgement: every wake re-reads its entire history at the parent's cost, and that repeated follow-up is the main drain to avoid. The parent receives those communications, not the child's complete transcript. On wake, use the new evidence; query status only when it answers a concrete coordination or diagnostic question.
 
 Child waits, terminal polls, and code-mode cell waits have separate arguments and limits. Use each tool's live schema, choose a suitable supported wait, and retain ownership of started processes. These instructions do not alter budgets, goal state, permissions, or the harness's automatic continuation behavior.
 
@@ -55,4 +57,4 @@ Give writing children non-overlapping file or component ownership. Serialize wor
 
 An implementing child should complete the requested artifact and affected checks before handoff, rather than return a first draft. Safe local work and disposable-fixture checks may continue within the brief; production side effects remain outside child scope. Repeat a check only after a relevant change or new evidence.
 
-The parent must read the actual diff, verify reported commands and results, and validate the affected behavior at the responsible layer. A skipped, unavailable, empty, or mocked-away required check is a blocker, not a pass. Correct in-scope defects and rerun the affected checks before completion.
+The parent must read the actual diff, verify reported commands and results, and validate the affected behavior at the responsible layer. A skipped, unavailable, empty, or mocked-away required check is a blocker, not a pass. Correct in-scope defects and rerun the affected checks before completion. A mission closes only once the child's work is in the parent's tree and its scratch is gone; unintegrated work and surviving scratch are one defect, not two.

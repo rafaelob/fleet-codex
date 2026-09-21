@@ -5,6 +5,18 @@ the [validation record](validation.md); these packages target Multi-Agent V2 and
 do not silently fall back to V1. You need access to the named models. Python 3.11+
 is needed only for the optional hook and local validation.
 
+## Upgrading from 0.3.x
+
+Advanced Delivery's total-thread cap drops from 5 to 4 (3 active children,
+equal to Balanced): update `max_concurrent_threads_per_session` in its installed
+`config.toml`. Balanced and Lean's `config.toml` are unchanged. Refresh the
+installed `AGENTS.snippet.md` or `AGENTS.with-skill.snippet.md` for every
+installed arrangement, and the `codex-orchestration` skill if installed: the
+delegation rules now close a child's mission on acceptance, stop reuse of a
+finished child for new work, and stop waking a child for status or an
+acknowledgement. To roll back, restore the prior cap value and the prior
+snippet/skill wording.
+
 ## Upgrading from 0.2.x
 
 Version 0.3.0 keeps the same roles, models and concurrency caps. Merge these two

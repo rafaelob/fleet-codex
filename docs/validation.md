@@ -74,6 +74,15 @@ Revision 0.2.0 deliberately sets Advanced/Balanced/Lean to 5/4/3 total threads,
 with intended child limits of 4/3/2. Those revised values and role allocations
 have not been exercised in a new native saturation or complete role-coverage run.
 Do not treat the historical writer or hook runs as certification of the new matrix.
+
+Revision 0.4.0 lowers Advanced from 5 to 4 total threads (3 children), equal to
+Balanced, on the stated ground that the cap is a ceiling and not a delegation
+target; Balanced and Lean's caps are unchanged. This is a configuration and
+instruction change, confirmed only by the catalog and component validators and
+the standard-library test suite; it has not been exercised in a new native
+concurrency or saturation run, and Advanced and Balanced now share one total-
+thread cap value while remaining distinct in model and role allocation.
+
 The legacy `agents.max_concurrent_threads_per_session` is a child cap; this
 binary adds one when translating it into a V2 total. Mixing the two settings
 would misstate capacity. The [pinned configuration resolver](https://github.com/openai/codex/blob/b979d4f1f04538ba5a5fcc434d499c007bfe1b8c/codex-rs/core/src/config/mod.rs#L2500)

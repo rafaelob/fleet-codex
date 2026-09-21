@@ -34,7 +34,7 @@ The parent supplies a complete bounded brief and inspects the delivered evidence
 
 ## Capacity and simplicity
 
-The V2 fragment sets **5 total threads including the lead**, allowing **at most 4 simultaneous children** in the target runtime. Start with one useful delegation and add another only for a disjoint result. Reconcile an implementation batch before starting another; do not fill the cap by routine.
+The V2 fragment sets **4 total threads including the lead**, allowing **at most 3 simultaneous children** in the target runtime: one lead plus three subagents. Treat the cap as a ceiling, not a target — dispatch only a child whose result pays for its own brief and review. Start with one useful delegation and add another only for a disjoint result. Reconcile an implementation batch before starting another; do not fill the cap by routine.
 
 The 15 role cards are available responsibilities, not 15 running agents. Removed roles have explicit owners:
 
@@ -43,6 +43,14 @@ Regular backend/frontend workers also handle fully specified small edits. The pa
 This is an adapted public roster, not a full personal-profile export. Retained roles preserve the task-based model allocation. Conservative caps are design choices, not benchmark-derived optima; see [the rationale](../../docs/orchestration.md).
 
 ## Validation status
+
+Revision 0.4.0 lowers this arrangement's total-thread cap from five to four
+(three active children, equal to Balanced Delivery) and rewrites the orchestration
+skill and both AGENTS snippets around bounded, single-mission delegation: an
+accepted delivery closes the child's mission, a finished child is not reused for
+new work, and status or acknowledgement wake-ups are avoided. This is a
+configuration and instruction change; it has not been exercised in a new native
+concurrency or saturation run. See [upgrade instructions](../../docs/installation.md#upgrading-from-03x).
 
 Revision 0.3.0 adds a one-minute minimum and five-minute default for native child
 waits, without changing this roster or cap. Choose explicit waits according to
