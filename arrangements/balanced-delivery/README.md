@@ -41,6 +41,12 @@ This is an adapted public roster, not a full personal-profile export. Retained r
 
 ## Validation status
 
+Revision 0.4.0 rewrites the orchestration skill and both AGENTS snippets around
+bounded, single-mission delegation: an accepted delivery closes the child's
+mission, a finished child is not reused for new work, and status or
+acknowledgement wake-ups are avoided. This roster and cap are unchanged. See
+[upgrade instructions](../../docs/installation.md#upgrading-from-03x).
+
 Revision 0.3.0 adds a one-minute minimum and five-minute default for native child
 waits, without changing this roster or cap. Choose explicit waits according to
 the task; see [adaptive waiting](../../docs/orchestration.md#adaptive-waiting)

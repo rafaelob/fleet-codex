@@ -52,11 +52,13 @@ Implementation and independent review remain separate even in Lean. An absent
 specialist is not permission to lower acceptance or move irreversible work into
 an underqualified role. These are public adaptations, not whole-home exports.
 
-Advanced permits four active children, Balanced three, and Lean two
-(total-thread caps of five, four, and three including the lead). Start with one
-useful child. Advanced leaves room for disjoint implementation and investigation;
-Balanced supports two implementation fronts and a bounded check; Lean favors a
-short implementation-then-review sequence. Review the combined artifact after
+Advanced and Balanced each permit three active children, and Lean two
+(total-thread caps of four, four, and three including the lead). The cap is a
+ceiling, not a target: dispatch a child only when its result pays for its own
+brief and review. Start with one useful child. Advanced leaves room for disjoint
+implementation and investigation; Balanced supports two implementation fronts
+and a bounded check; Lean favors a short implementation-then-review sequence.
+Review the combined artifact after
 the writers finish; these examples are not mandatory phases or reserved slots.
 
 The names describe intended delivery complexity and resource allocation, not

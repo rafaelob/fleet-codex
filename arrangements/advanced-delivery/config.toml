@@ -9,4 +9,4 @@ enabled = true
 tool_namespace = "agents"
 min_wait_timeout_ms = 60000
 default_wait_timeout_ms = 300000
-max_concurrent_threads_per_session = 5
+max_concurrent_threads_per_session = 4

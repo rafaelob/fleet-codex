@@ -18,8 +18,8 @@ e Sol para backend e integração. Lean Delivery concentra trabalho em Luna e re
 Sol `high` para revisão da integração e Astra para aconselhamento somente leitura.
 No Lean, frontend e backend ficam com Luna, assim como os demais papéis.
 Isso descreve a distribuição escolhida; não é uma promessa medida de preço ou
-qualidade. Os tetos configurados são 5, 4 e 3 threads totais, permitindo até
-4, 3 e 2 filhos ativos, respectivamente. Os papéis são opções, não agentes
+qualidade. Os tetos configurados são 4, 4 e 3 threads totais, permitindo até
+3, 3 e 2 filhos ativos, respectivamente. Os papéis são opções, não agentes
 iniciados juntos. Confira os limites de [validação](validation.md).
 
 ## Instalar
