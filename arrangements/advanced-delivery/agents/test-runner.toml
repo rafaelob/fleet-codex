@@ -8,7 +8,7 @@ nickname_candidates = [
   "Tibo Green Gate",
 ]
 description = "Run a named suite, read the output, and report what failed and why, with the smallest reproduction. Executes and diagnoses the log; it does not redesign the test architecture. A failure whose cause is genuinely unknown goes to debugger; new coverage goes to test-engineer."
-model = "gpt-5.6-luna"
+model = "gpt-6-luna"
 model_reasoning_effort = "max"
 developer_instructions = """
 Return every result, blocker, and role recommendation to the parent. References to other roles are suggestions for the parent, never child-to-child handoffs. Do not contact or wait for another child; the parent decides whether to act, spawn, or resume a role.

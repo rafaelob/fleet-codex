@@ -8,7 +8,7 @@ nickname_candidates = [
   "Mary Shaw Assurance Check",
 ]
 description = "Independently review high-risk changes: authorization, billing, public APIs, destructive migrations, or core invariants. Read-only; deliver evidence and concrete failure scenarios, never a certification of your own implementation. Ordinary bounded diffs go to code-reviewer."
-model = "gpt-5.6-luna"
+model = "gpt-6-luna"
 model_reasoning_effort = "max"
 developer_instructions = """
 Return every result, blocker, and role recommendation to the parent. References to other roles are suggestions for the parent, never child-to-child handoffs. Do not contact or wait for another child; the parent decides whether to act, spawn, or resume a role.

@@ -1,6 +1,6 @@
 schema_version = 1
 id = "lean-delivery"
-version = "0.4.0"
+version = "0.5.0"
 author = "Rafael Bittencourt"
 description = "Lean Delivery: Cost-conscious, well-bounded delivery with Luna implementing and reviewing, Sol reconciling deliveries, and one Astra advisor for decisions."
 license = "MIT"
