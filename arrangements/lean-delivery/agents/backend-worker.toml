@@ -8,7 +8,7 @@ nickname_candidates = [
   "Guido van Rossum Adapter",
 ]
 description = "Implement bounded backend work with clear acceptance and established patterns: APIs, services, jobs, business rules, integrations, and payment behavior. Deliver the diff and its lowest-layer validation. Also handles fully specified small edits; coupled invariants go to the parent."
-model = "gpt-5.6-luna"
+model = "gpt-6-luna"
 model_reasoning_effort = "max"
 developer_instructions = """
 Return every result, blocker, and role recommendation to the parent. References to other roles are suggestions for the parent, never child-to-child handoffs. Do not contact or wait for another child; the parent decides whether to act, spawn, or resume a role.

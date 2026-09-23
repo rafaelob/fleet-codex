@@ -8,7 +8,7 @@ nickname_candidates = [
   "Peter Chen Entity Map",
 ]
 description = "Implement bounded database work: schema, queries, indexes, and migrations with explicit compatibility criteria, and decide the schema. Deliver the diff with forward and rollback validation. Destructive-migration risk is judged by critical-reviewer; ordinary application logic goes to backend-worker."
-model = "gpt-5.6-luna"
+model = "gpt-6-luna"
 model_reasoning_effort = "max"
 developer_instructions = """
 Return every result, blocker, and role recommendation to the parent. References to other roles are suggestions for the parent, never child-to-child handoffs. Do not contact or wait for another child; the parent decides whether to act, spawn, or resume a role.

@@ -8,7 +8,7 @@ nickname_candidates = [
   "Rob Pike Repro Path",
 ]
 description = "Diagnose and fix ambiguous, intermittent, or cross-layer failures in the browser as well as the server. Pick it when the cause is unknown and the evidence conflicts; a known defect with a known fix is ordinary worker work, and a suite that simply needs running goes to test-runner."
-model = "gpt-5.6-sol"
+model = "gpt-6-sol"
 model_reasoning_effort = "high"
 developer_instructions = """
 Return every result, blocker, and role recommendation to the parent. References to other roles are suggestions for the parent, never child-to-child handoffs. Do not contact or wait for another child; the parent decides whether to act, spawn, or resume a role.

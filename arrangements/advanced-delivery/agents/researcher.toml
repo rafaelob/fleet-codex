@@ -8,7 +8,7 @@ nickname_candidates = [
   "Eugene Garfield Citation Map",
 ]
 description = "Answer a question against primary sources outside this repository: official docs, specifications, changelogs, and installed dependency source. Read-only; every perishable fact comes back dated and cited or marked UNVERIFIED. Repository questions go to explorer instead."
-model = "gpt-5.6-luna"
+model = "gpt-6-luna"
 model_reasoning_effort = "max"
 developer_instructions = """
 Return every result, blocker, and role recommendation to the parent. References to other roles are suggestions for the parent, never child-to-child handoffs. Do not contact or wait for another child; the parent decides whether to act, spawn, or resume a role.

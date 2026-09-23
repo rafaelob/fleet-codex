@@ -11,16 +11,16 @@ third-party orchestration service to use these files.
 [Skills](skills/README.md) · [Plugins](plugins/README.md) ·
 [Validation and compatibility](docs/validation.md)
 
-Version 0.4.0 is a community preview. Historical hook and selected-role tests are
+Version 0.5.0 is a community preview. Historical hook and selected-role tests are
 recorded; the revised allocations and caps are not fully runtime-certified.
 
 ## Choose an arrangement
 
 | Arrangement | Lead | Specialist allocation | Configured cap / recommended active children |
 | --- | --- | --- | --- |
-| [Advanced Delivery](arrangements/advanced-delivery/README.md) | `gpt-5.6-sol`, `xhigh` | 15 roles: 4 Astra, 4 Sol, 7 Luna | 4 / up to 3 |
-| [Balanced Delivery](arrangements/balanced-delivery/README.md) | `gpt-5.6-sol`, `xhigh` | 12 roles: 2 Astra, 2 Sol, 8 Luna | 4 / up to 3 |
-| [Lean Delivery](arrangements/lean-delivery/README.md) | `gpt-5.6-sol`, `high` | 8 roles: 1 Astra, 1 Sol, 6 Luna | 3 / up to 2 |
+| [Advanced Delivery](arrangements/advanced-delivery/README.md) | `gpt-6-sol`, `xhigh` | 15 roles: 4 Astra, 4 Sol, 7 Luna | 4 / up to 3 |
+| [Balanced Delivery](arrangements/balanced-delivery/README.md) | `gpt-6-sol`, `xhigh` | 12 roles: 2 Astra, 2 Sol, 8 Luna | 4 / up to 3 |
+| [Lean Delivery](arrangements/lean-delivery/README.md) | `gpt-6-sol`, `high` | 8 roles: 1 Astra, 1 Sol, 6 Luna | 3 / up to 2 |
 
 The three arrangements provide progressively smaller role catalogs and enable
 Multi-Agent V2. Roles are available choices, not agents started together. Allocate only useful,

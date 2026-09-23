@@ -1,6 +1,6 @@
 # Balanced Delivery
 
-Everyday product delivery with Luna implementing established patterns, Sol handling backend work and integration review, and Astra handling decisions and coupled implementation. The lead uses `gpt-5.6-sol` at `xhigh`. This is an allocation policy, not a measured quality or cost guarantee.
+Everyday product delivery with Luna implementing established patterns, Sol handling backend work and integration review, and Astra handling decisions and coupled implementation. The lead uses `gpt-6-sol` at `xhigh`. This is an allocation policy, not a measured quality or cost guarantee.
 
 ## Install
 
@@ -15,17 +15,17 @@ Reserve Astra for `advisor` and `hard-task-specialist`, and Sol for `backend-wor
 | Role | Model | Reasoning effort |
 | --- | --- | --- |
 | advisor | gpt-6-astra | high |
-| backend-worker | gpt-5.6-sol | high |
-| code-reviewer | gpt-5.6-luna | max |
-| critical-reviewer | gpt-5.6-luna | max |
-| database-engineer | gpt-5.6-luna | max |
-| explorer | gpt-5.6-luna | max |
-| frontend-worker | gpt-5.6-luna | max |
+| backend-worker | gpt-6-sol | high |
+| code-reviewer | gpt-6-luna | max |
+| critical-reviewer | gpt-6-luna | max |
+| database-engineer | gpt-6-luna | max |
+| explorer | gpt-6-luna | max |
+| frontend-worker | gpt-6-luna | max |
 | hard-task-specialist | gpt-6-astra | high |
-| infra-sre | gpt-5.6-luna | max |
-| integrator-reviewer | gpt-5.6-sol | high |
-| researcher | gpt-5.6-luna | max |
-| test-runner | gpt-5.6-luna | max |
+| infra-sre | gpt-6-luna | max |
+| integrator-reviewer | gpt-6-sol | high |
+| researcher | gpt-6-luna | max |
+| test-runner | gpt-6-luna | max |
 
 The parent supplies a complete bounded brief and inspects the delivered evidence. Every spawn uses `agent_type` and `fork_turns: "none"`, with no call-level model or effort override. Children never spawn children.
 
@@ -40,6 +40,12 @@ Regular workers also handle small edits and create their regression tests. Advis
 This is an adapted public roster, not a full personal-profile export. Retained roles preserve the task-based model allocation. Conservative caps are design choices, not benchmark-derived optima; see [the rationale](../../docs/orchestration.md).
 
 ## Validation status
+
+Revision 0.5.0 replaces the retired GPT-5.6 Sol and Luna model ids with
+`gpt-6-sol` and `gpt-6-luna` in the lead and every role card. Allocation,
+reasoning effort and caps are unchanged, and every Luna role stays at `max`.
+This is a configuration change confirmed only by the catalog validators; it
+has not been exercised in a new native run.
 
 Revision 0.4.0 rewrites the orchestration skill and both AGENTS snippets around
 bounded, single-mission delegation: an accepted delivery closes the child's

@@ -8,7 +8,7 @@ nickname_candidates = [
   "Rebecca Parsons System Fit",
 ]
 description = "Reconcile a bounded batch of worker deliverables against one acceptance contract. Read-only: read every touched file, run the scoped checks, and report integration defects for the lead to fix; deliver one consolidated report. High-risk certification goes to critical-reviewer."
-model = "gpt-5.6-sol"
+model = "gpt-6-sol"
 model_reasoning_effort = "high"
 developer_instructions = """
 Return every result, blocker, and role recommendation to the parent. References to other roles are suggestions for the parent, never child-to-child handoffs. Do not contact or wait for another child; the parent decides whether to act, spawn, or resume a role.

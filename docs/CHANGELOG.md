@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0 — 2026-09-22
+
+- Replace the retired `gpt-5.6-sol` and `gpt-5.6-luna` model ids with
+  `gpt-6-sol` and `gpt-6-luna` in all three arrangements: lead `config.toml`,
+  every role card, and the README model tables.
+- Allocation, reasoning effort and thread caps are unchanged; every Luna role
+  remains at `max` and Astra roles are untouched.
+- Configuration change only; the dated runtime evidence still refers to the
+  retired ids and has not been re-run against the new models.
+
 ## 0.4.0 — 2026-09-20
 
 - Lower Advanced Delivery's total-thread cap from five to four, matching

@@ -75,6 +75,11 @@ with intended child limits of 4/3/2. Those revised values and role allocations
 have not been exercised in a new native saturation or complete role-coverage run.
 Do not treat the historical writer or hook runs as certification of the new matrix.
 
+Revision 0.5.0 renames the Sol and Luna model ids to `gpt-6-sol` and `gpt-6-luna`
+without changing allocation, effort or caps. The dated runtime evidence below
+was recorded against the retired GPT-5.6 Sol and Luna ids and does
+not certify the renamed models.
+
 Revision 0.4.0 lowers Advanced from 5 to 4 total threads (3 children), equal to
 Balanced, on the stated ground that the cap is a ceiling and not a delegation
 target; Balanced and Lean's caps are unchanged. This is a configuration and
