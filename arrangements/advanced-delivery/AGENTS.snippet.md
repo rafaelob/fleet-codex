@@ -3,7 +3,7 @@
 ### Role selection
 
 - Before delegating, coordinating ongoing work, or reconciling deliveries, invoke the Skill tool with `codex-orchestration` when installed. If no Skill tool exists, read its `SKILL.md` through the native file-reading interface. If the skill is not installed, follow the rules below.
-- Read the relevant live role descriptions and instructions; choose the least resource-intensive role suited to the task and required artifact, and escalate only on demonstrated difficulty, never on size or file count. Read-only roles never receive implementation work. `list_agents` shows running children, not available roles.
+- Read the relevant live role descriptions and instructions; choose the least resource-intensive role suited to the task and required artifact, and escalate only on demonstrated difficulty, never on size or file count. A role whose card reserves it for a problem you or a regular role already tried and failed to solve, such as the advisor or, where installed, the hard-task-specialist, is dispatched only after that failure, and its brief names the attempt. Read-only roles never receive implementation work. `list_agents` shows running children, not available roles.
 
 ### Dispatch contract
 

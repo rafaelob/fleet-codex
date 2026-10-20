@@ -19,7 +19,8 @@ must go back to the parent, not be waived because the designated reviewer ran.
 
 **Lean Delivery** concentrates the same responsibilities on lighter models. Use
 it for well-defined work where spending on every specialist is less useful. Its
-integration reviewer uses Sol `high`; its decision advisor uses Astra `high`.
+integration reviewer uses Sol `high`; its decision advisor uses Astra `max`, as an
+escalation after a named failed attempt.
 All other specialists, including backend and frontend workers, use Luna `max`.
 This keeps the expensive specialist allocation narrow while retaining a dedicated
 cross-delivery integration review. The lead is separate from these child counts.
@@ -42,24 +43,27 @@ the same task-based allocation, but removed responsibilities have explicit owner
 | Light backend/frontend variants | Regular worker | Regular worker | Regular worker |
 | Documentation writer | Parent | Parent | Parent |
 | Security sweep | Critical reviewer | Critical reviewer | Critical reviewer |
-| Separate design direction | Design lead retained | Advisor | Advisor |
-| Unknown-cause diagnosis | Debugger retained | Hard-task specialist | Parent |
+| Separate design direction | Design lead retained | Advisor, after the lead's attempt fails | Advisor, after the lead's attempt fails |
+| Unknown-cause diagnosis | Debugger retained | Hard-task specialist, after a failed attempt | Parent |
 | Separate test author | Test engineer retained | Owning worker | Owning worker |
 | Coupled implementation, database, infrastructure | Dedicated roles retained | Dedicated roles retained | Parent or separately qualified help |
 | Separate test runner | Retained | Retained | Parent; workers run their own checks |
 
-Implementation and independent review remain separate even in Lean. An absent
+The advisor, and the hard-task specialist where an arrangement has one, are
+escalation roles: dispatch either only after an attempt by the lead or a regular
+role has failed, with that attempt named in the brief. Implementation and
+independent review remain separate even in Lean. An absent
 specialist is not permission to lower acceptance or move irreversible work into
 an underqualified role. These are public adaptations, not whole-home exports.
 
-Advanced and Balanced each permit three active children, and Lean two
-(total-thread caps of four, four, and three including the lead). The cap is a
-ceiling, not a target: dispatch a child only when its result pays for its own
-brief and review. Start with one useful child. Advanced leaves room for disjoint
-implementation and investigation; Balanced supports two implementation fronts
-and a bounded check; Lean favors a short implementation-then-review sequence.
-Review the combined artifact after
-the writers finish; these examples are not mandatory phases or reserved slots.
+All three arrangements suggest up to five simultaneous children (a total-thread
+cap of six including the lead). The cap is a ceiling, not a target: dispatch a
+child only when its result pays for its own brief and review. Start with one
+useful child. Advanced leaves room for disjoint implementation and
+investigation; Balanced supports two implementation fronts and a bounded check;
+Lean favors a short implementation-then-review sequence. Review the combined
+artifact after the writers finish; these examples are not mandatory phases or
+reserved slots.
 
 The names describe intended delivery complexity and resource allocation, not
 subscriptions or measured savings. The smaller public caps are deliberate

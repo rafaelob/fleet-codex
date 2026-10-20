@@ -1,5 +1,30 @@
 # Changelog
 
+## 0.6.0 — 2026-10-20
+
+- Replace `gpt-6-sol` with `gpt-6.1-sol` in all three arrangements: lead
+  `config.toml`, every Sol role card (Advanced four, Balanced two, Lean one) and
+  the README model tables. There is no `gpt-6.1-luna`; Luna roles keep
+  `gpt-6-luna` at `max`.
+- Raise `advisor` (all three arrangements) and `hard-task-specialist` (Advanced
+  and Balanced) from Astra `high` to `max`, and Advanced's `critical-reviewer`
+  from Astra `high` to `xhigh`. Lower the Advanced and Balanced leads from
+  `xhigh` to `high`, matching Lean. Sol roles stay at `high` and Advanced's
+  `design-lead` stays at Astra `high`. Sol and Astra efforts stay within
+  `high`, `xhigh` and `max`, and `ultra` is not used.
+- Make the `advisor` and, in Advanced and Balanced, the `hard-task-specialist`
+  escalations: their cards, the AGENTS snippets and the `codex-orchestration`
+  skill now dispatch them only after an attempt by the lead or a regular role has
+  failed, with that attempt named in the brief, never as a first choice or to
+  fill an idle slot. In Balanced and Lean the advisor's design direction, and in
+  Balanced the specialist's unknown-cause diagnosis, follow the same condition.
+- Set `max_concurrent_threads_per_session = 6` in all three arrangements (Advanced
+  and Balanced from 4, Lean from 3): the lead plus up to five suggested
+  simultaneous children. The cap stays a ceiling, not a target.
+- No role card is added or removed; the 15, 12 and 8 role catalogs are unchanged.
+- Configuration and instruction change only; the dated runtime evidence predates
+  it and no native run used `gpt-6.1-sol` or the new cap.
+
 ## 0.5.0 — 2026-09-22
 
 - Replace the retired `gpt-5.6-sol` and `gpt-5.6-luna` model ids with

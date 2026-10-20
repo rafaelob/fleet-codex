@@ -1,6 +1,6 @@
 # Balanced Delivery
 
-Everyday product delivery with Luna implementing established patterns, Sol handling backend work and integration review, and Astra handling decisions and coupled implementation. The lead uses `gpt-6-sol` at `xhigh`. This is an allocation policy, not a measured quality or cost guarantee.
+Everyday product delivery with Luna implementing established patterns, Sol handling backend work and integration review, and Astra handling decisions and coupled implementation. The lead uses `gpt-6.1-sol` at `high`. This is an allocation policy, not a measured quality or cost guarantee.
 
 ## Install
 
@@ -10,20 +10,20 @@ Follow the [installation guide](../../docs/installation.md). Merge only `config.
 
 Read the live role's description, instructions, resolved model and effort before dispatch. Match the artifact and task difficulty, not the role name alone. Luna is an implementation model for established patterns, not just a reconnaissance option. Keep implementation, advice, and independent review separate.
 
-Reserve Astra for `advisor` and `hard-task-specialist`, and Sol for `backend-worker` and `integrator-reviewer`. Other roles use Luna, including critical review; if the evidence or available reviewer is insufficient for the risk, return to the parent for an independently qualified review.
+Reserve Astra for `advisor` and `hard-task-specialist`, and Sol for `backend-worker` and `integrator-reviewer`. Other roles use Luna, including critical review; if the evidence or available reviewer is insufficient for the risk, return to the parent for an independently qualified review. The advisor and the hard-task-specialist are escalations, not first choices: dispatch either, including the advisor for design direction and the specialist for unknown-cause diagnosis, only after an attempt by the lead or a regular role has failed, and name that attempt in the brief.
 
 | Role | Model | Reasoning effort |
 | --- | --- | --- |
-| advisor | gpt-6-astra | high |
-| backend-worker | gpt-6-sol | high |
+| advisor | gpt-6-astra | max |
+| backend-worker | gpt-6.1-sol | high |
 | code-reviewer | gpt-6-luna | max |
 | critical-reviewer | gpt-6-luna | max |
 | database-engineer | gpt-6-luna | max |
 | explorer | gpt-6-luna | max |
 | frontend-worker | gpt-6-luna | max |
-| hard-task-specialist | gpt-6-astra | high |
+| hard-task-specialist | gpt-6-astra | max |
 | infra-sre | gpt-6-luna | max |
-| integrator-reviewer | gpt-6-sol | high |
+| integrator-reviewer | gpt-6.1-sol | high |
 | researcher | gpt-6-luna | max |
 | test-runner | gpt-6-luna | max |
 
@@ -31,15 +31,25 @@ The parent supplies a complete bounded brief and inspects the delivered evidence
 
 ## Capacity and simplicity
 
-The V2 fragment sets **4 total threads including the lead**, allowing **at most 3 simultaneous children** in the target runtime. Start with one useful delegation and add another only for a disjoint result. Reconcile an implementation batch before starting another; do not fill the cap by routine.
+The V2 fragment sets **6 total threads including the lead**, allowing **at most 5 simultaneous children** in the target runtime: one lead plus five subagents. Treat the cap as a ceiling, not a target — dispatch only a child whose result pays for its own brief and review. Start with one useful delegation and add another only for a disjoint result. Reconcile an implementation batch before starting another; do not fill the cap by routine.
 
 The 12 role cards are available responsibilities, not 12 running agents. Removed roles have explicit owners:
 
-Regular workers also handle small edits and create their regression tests. Advisor supplies design direction; hard-task-specialist handles unknown-cause diagnosis before a scoped repair. The parent writes documentation; critical-reviewer handles security review. Test-runner runs existing checks and never becomes a test author.
+Regular workers also handle small edits and create their regression tests. Advisor supplies design direction once an attempt by the lead or a regular role has failed; hard-task-specialist handles unknown-cause diagnosis before a scoped repair, once an attempt by the lead or a regular role has failed. The parent writes documentation; critical-reviewer handles security review. Test-runner runs existing checks and never becomes a test author.
 
 This is an adapted public roster, not a full personal-profile export. Retained roles preserve the task-based model allocation. Conservative caps are design choices, not benchmark-derived optima; see [the rationale](../../docs/orchestration.md).
 
 ## Validation status
+
+Revision 0.6.0 replaces `gpt-6-sol` with `gpt-6.1-sol` in the lead and every Sol
+role, lowers the lead from `xhigh` to `high`, raises the advisor and
+hard-task-specialist to Astra `max`, makes both escalations after a named failed
+attempt (design direction and diagnosis included), and raises the total-thread
+cap from four to six (five simultaneous children). The Sol and Luna roles keep
+their efforts. This is a
+configuration and instruction change confirmed only by the catalog validators
+and the standard-library test suite; it has not been exercised in a new native
+run or saturation test.
 
 Revision 0.5.0 replaces the retired GPT-5.6 Sol and Luna model ids with
 `gpt-6-sol` and `gpt-6-luna` in the lead and every role card. Allocation,

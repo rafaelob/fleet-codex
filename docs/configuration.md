@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | Lead model and effort | Each arrangement's `config.toml` | Select the root agent; restore the prior fields in your installation to undo a change. |
 | V2 and namespace | Each arrangement's `config.toml` | Enable the required orchestration tools; revert only installed fields, preserving other feature settings. |
-| Concurrency cap | Each arrangement's `[features.multi_agent_v2]` table | Bound total active threads, including the lead in the target V2 runtime; consult counting evidence before adjusting. |
+| Concurrency cap | Each arrangement's `[features.multi_agent_v2]` table | Bound total active threads, including the lead in the target V2 runtime; every arrangement sets 6, the lead plus up to five children, as a ceiling and not a target. Consult counting evidence before adjusting. |
 | Native child waits | Each arrangement's `[features.multi_agent_v2]` table | Reduce empty wait returns; restore only your previous wait fields to roll back. |
 | Specialist model, effort and behavior | Each `agents/<name>.toml` | Define one role; restore its reviewed prior revision, not a whole personal config. |
 | Optional hook command and matcher | `hooks/spawn-contract/hooks.example.json`, adapted at installation | Review and trust the local command; remove only this handler to uninstall. |
@@ -14,7 +14,7 @@
 
 ## Native child wait settings
 
-All three arrangements use the same wait settings in version 0.5.0:
+All three arrangements use the same wait settings in version 0.6.0:
 
 | Field under `features.multi_agent_v2` | Native baseline | Catalog value | Meaning |
 | --- | --- | --- | --- |
@@ -63,6 +63,7 @@ and [default nickname selection](https://github.com/openai/codex/blob/b979d4f1f0
 
 | Version | Change | Reason | Rollback |
 | --- | --- | --- | --- |
+| 0.6.0 (2026-10-20) | Replace `gpt-6-sol` with `gpt-6.1-sol` in every lead and role card; lower the Advanced and Balanced lead from `xhigh` to `high`; raise `advisor` and `hard-task-specialist` to Astra `max` and Advanced's `critical-reviewer` to Astra `xhigh`; dispatch the advisor and the hard-task-specialist only after a named failed attempt by the lead or a regular role; set `max_concurrent_threads_per_session = 6` (the lead plus five children) in all three arrangements | `gpt-6.1-sol` supersedes `gpt-6-sol`; the escalation roles receive only problems the default roles failed on, and `high` is the lead's cost and quality balance point, both design choices and not measured quality gains; five simultaneous children is the suggested ceiling, not a target. Sol and Astra efforts stay within `high`, `xhigh` and `max`, Luna stays at `max`, and `ultra` is not used | Restore the prior `model`, `model_reasoning_effort` and cap values in each `config.toml` and `agents/*.toml` (cap 4, 4 and 3 for Advanced, Balanced and Lean), the prior `advisor` and `hard-task-specialist` cards and the prior snippet and skill wording; no other field changed. The superseded id works only where your runtime still offers it. |
 | 0.5.0 (2026-09-22) | Replace `gpt-5.6-sol` and `gpt-5.6-luna` with `gpt-6-sol` and `gpt-6-luna` in every lead and role card; allocation, effort and caps unchanged | The GPT-5.6 Sol and Luna ids are retired | Restore the prior `model` values in each `config.toml` and `agents/*.toml`; no other field changed. |
 | 0.4.0 (2026-09-20) | Lower Advanced Delivery's total-thread cap from five to four (three active children, equal to Balanced); rewrite the orchestration skill and every AGENTS snippet around bounded, single-mission delegation | Treat the configured cap as a ceiling, not a target, and stop the context cost of reusing or repeatedly waking a child after its mission is accepted | Restore `max_concurrent_threads_per_session = 5` in Advanced Delivery's `config.toml`; restore the prior skill and snippet wording. No other arrangement's config changed. |
 | 0.3.0 (2026-09-13) | Set one-minute minimum and five-minute default child waits; add adaptive waiting guidance | Reduce empty parent wait returns without changing budgets or the execution topology | Restore only prior wait fields and the affected instruction/skill sections; remove these fields only if they were previously absent. |
