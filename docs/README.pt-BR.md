@@ -7,8 +7,8 @@ os que ajudam na tarefa.
 
 | Arranjo | Principal | Especialistas |
 | --- | --- | --- |
-| [Advanced Delivery](../arrangements/advanced-delivery/README.md) | Sol `xhigh` | 4 Astra, 4 Sol e 7 Luna |
-| [Balanced Delivery](../arrangements/balanced-delivery/README.md) | Sol `xhigh` | 2 Astra, 2 Sol e 8 Luna |
+| [Advanced Delivery](../arrangements/advanced-delivery/README.md) | Sol `high` | 4 Astra, 4 Sol e 7 Luna |
+| [Balanced Delivery](../arrangements/balanced-delivery/README.md) | Sol `high` | 2 Astra, 2 Sol e 8 Luna |
 | [Lean Delivery](../arrangements/lean-delivery/README.md) | Sol `high` | 1 Astra, 1 Sol e 6 Luna |
 
 Os três habilitam Multi-Agent V2. Advanced Delivery prioriza trabalhos de produto
@@ -18,9 +18,14 @@ e Sol para backend e integração. Lean Delivery concentra trabalho em Luna e re
 Sol `high` para revisão da integração e Astra para aconselhamento somente leitura.
 No Lean, frontend e backend ficam com Luna, assim como os demais papéis.
 Isso descreve a distribuição escolhida; não é uma promessa medida de preço ou
-qualidade. Os tetos configurados são 4, 4 e 3 threads totais, permitindo até
-3, 3 e 2 filhos ativos, respectivamente. Os papéis são opções, não agentes
-iniciados juntos. Confira os limites de [validação](validation.md).
+qualidade. O teto configurado é de 6 threads totais nos três arranjos (o
+principal mais até 5 filhos ativos simultâneos); é um limite máximo, não uma
+meta: delegue só o que compensa o próprio briefing e a revisão. O advisor
+(Astra), e o hard-task-specialist no Advanced e no Balanced, são escalações, não
+primeira escolha: só depois que uma tentativa do principal ou de um papel comum
+falhou, com essa tentativa descrita no briefing. Os papéis são
+opções, não agentes iniciados juntos. Confira os limites de
+[validação](validation.md).
 
 ## Instalar
 

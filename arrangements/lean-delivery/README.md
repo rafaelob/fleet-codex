@@ -1,6 +1,6 @@
 # Lean Delivery
 
-Cost-conscious, well-bounded delivery with Luna implementing and reviewing, Sol reconciling deliveries, and one Astra advisor for decisions. The lead uses `gpt-6-sol` at `high`. This is an allocation policy, not a measured quality or cost guarantee.
+Cost-conscious, well-bounded delivery with Luna implementing and reviewing, Sol reconciling deliveries, and one Astra advisor for decisions. The lead uses `gpt-6.1-sol` at `high`. This is an allocation policy, not a measured quality or cost guarantee.
 
 ## Install
 
@@ -10,32 +10,41 @@ Follow the [installation guide](../../docs/installation.md). Merge only `config.
 
 Read the live role's description, instructions, resolved model and effort before dispatch. Match the artifact and task difficulty, not the role name alone. Luna is an implementation model for established patterns, not just a reconnaissance option. Keep implementation, advice, and independent review separate.
 
-Use at most one active `advisor` and one active `integrator-reviewer`; other child roles use Luna. An advisor remains read-only and is not an implementation fallback. Coupled and unknown-cause implementation belongs to the parent. If risk exceeds the available reviewer, obtain independently qualified review; do not weaken acceptance.
+Use at most one active `advisor` and one active `integrator-reviewer`; other child roles use Luna. An advisor remains read-only and is not an implementation fallback; it is an escalation, not a first opinion, so dispatch it, including for design direction, only after an attempt by the lead or a regular role has failed and name that attempt in the brief. Coupled and unknown-cause implementation belongs to the parent. If risk exceeds the available reviewer, obtain independently qualified review; do not weaken acceptance.
 
 | Role | Model | Reasoning effort |
 | --- | --- | --- |
-| advisor | gpt-6-astra | high |
+| advisor | gpt-6-astra | max |
 | backend-worker | gpt-6-luna | max |
 | code-reviewer | gpt-6-luna | max |
 | critical-reviewer | gpt-6-luna | max |
 | explorer | gpt-6-luna | max |
 | frontend-worker | gpt-6-luna | max |
-| integrator-reviewer | gpt-6-sol | high |
+| integrator-reviewer | gpt-6.1-sol | high |
 | researcher | gpt-6-luna | max |
 
 The parent supplies a complete bounded brief and inspects the delivered evidence. Every spawn uses `agent_type` and `fork_turns: "none"`, with no call-level model or effort override. Children never spawn children.
 
 ## Capacity and simplicity
 
-The V2 fragment sets **3 total threads including the lead**, allowing **at most 2 simultaneous children** in the target runtime. Start with one useful delegation and add another only for a disjoint result. Reconcile an implementation batch before starting another; do not fill the cap by routine.
+The V2 fragment sets **6 total threads including the lead**, allowing **at most 5 simultaneous children** in the target runtime: one lead plus five subagents. Treat the cap as a ceiling, not a target — dispatch only a child whose result pays for its own brief and review. Start with one useful delegation and add another only for a disjoint result. Reconcile an implementation batch before starting another; do not fill the cap by routine.
 
 The 8 role cards are available responsibilities, not 8 running agents. Removed roles have explicit owners:
 
-Backend/frontend workers handle small edits and write and run their own regression tests. Advisor supplies design direction but never implements. The parent owns documentation, standalone test execution, database and infrastructure work, and coupled or unknown-cause implementation; request separately qualified help when these exceed the parent's scope or capability. Critical-reviewer handles security review; never downgrade the required evidence.
+Backend/frontend workers handle small edits and write and run their own regression tests. Advisor supplies design direction, once an attempt by the lead or a regular role has failed, but never implements. The parent owns documentation, standalone test execution, database and infrastructure work, and coupled or unknown-cause implementation; request separately qualified help when these exceed the parent's scope or capability. Critical-reviewer handles security review; never downgrade the required evidence.
 
 This is an adapted public roster, not a full personal-profile export. Retained roles preserve the task-based model allocation. Conservative caps are design choices, not benchmark-derived optima; see [the rationale](../../docs/orchestration.md).
 
 ## Validation status
+
+Revision 0.6.0 replaces `gpt-6-sol` with `gpt-6.1-sol` in the lead and the
+integrator-reviewer, raises the advisor to Astra `max`, makes the advisor an
+escalation after a named failed attempt (design direction included), and
+raises the total-thread cap from three to six (five simultaneous children). The
+lead, the integrator-reviewer and the Luna roles keep their efforts. This is a
+configuration and instruction change confirmed only by the catalog validators
+and the standard-library test suite; it has not been exercised in a new native
+run or saturation test.
 
 Revision 0.5.0 replaces the retired GPT-5.6 Sol and Luna model ids with
 `gpt-6-sol` and `gpt-6-luna` in the lead and every role card. Allocation,

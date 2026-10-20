@@ -5,6 +5,31 @@ the [validation record](validation.md); these packages target Multi-Agent V2 and
 do not silently fall back to V1. You need access to the named models. Python 3.11+
 is needed only for the optional hook and local validation.
 
+## Upgrading from 0.5.x
+
+Version 0.6.0 adds and removes no role cards. In your installed copy of the chosen
+arrangement:
+
+- Replace `gpt-6-sol` with `gpt-6.1-sol` in the lead `model` field and in every
+  installed role card that names it. Your account and Codex runtime must offer
+  `gpt-6.1-sol`; an unavailable model is an error to resolve, not a reason to
+  substitute silently.
+- Refresh the changed efforts: the Advanced and Balanced lead is `high` (was
+  `xhigh`; Lean stays `high`), `advisor` and `hard-task-specialist` (Advanced and
+  Balanced) are Astra `max`, and Advanced's `critical-reviewer` is Astra `xhigh`.
+  Lean has no `hard-task-specialist`; its `advisor` is Astra `max`.
+- Set `max_concurrent_threads_per_session = 6` under `[features.multi_agent_v2]`
+  in all three arrangements: the lead plus up to five simultaneous children. It is
+  a ceiling, not a target.
+- Refresh the installed `AGENTS.snippet.md` or `AGENTS.with-skill.snippet.md`, the
+  `advisor` and `hard-task-specialist` cards and, if installed, the
+  `codex-orchestration` skill: both roles are dispatched only after an attempt by
+  the lead or a regular role has failed, with that attempt named in the brief.
+
+To roll back, restore the prior model, effort and cap values together with the
+prior `advisor` and `hard-task-specialist` cards, snippet and skill wording; no
+other field changed.
+
 ## Upgrading from 0.3.x
 
 Advanced Delivery's total-thread cap drops from 5 to 4 (3 active children,

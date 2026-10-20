@@ -80,6 +80,21 @@ without changing allocation, effort or caps. The dated runtime evidence below
 was recorded against the retired GPT-5.6 Sol and Luna ids and does
 not certify the renamed models.
 
+Revision 0.6.0 replaces `gpt-6-sol` with `gpt-6.1-sol`, lowers the Advanced and
+Balanced lead from `xhigh` to `high`, raises `advisor` and `hard-task-specialist`
+to Astra `max` and Advanced's `critical-reviewer` to Astra `xhigh`, gates the
+advisor and the hard-task-specialist on a named failed attempt, and sets every
+arrangement to 6 total threads. The count follows the
+0.1.0 reading above: in the target binary a V2 cap of 6 gave total slots
+including the lead, so at most 5 concurrent children (7 gave 6). A cap of 6 is
+therefore one lead plus five suggested simultaneous children, and remains a
+ceiling, not a target. That prompt-input evidence resolves configuration only;
+no saturation or slot-release run was made for this revision. No native run used
+`gpt-6.1-sol`, and each manifest's declared `codex_version` is unchanged, so
+confirm that your runtime's model catalog lists the id before installing. The
+dated runtime evidence in this repository predates the revision and certifies
+none of it.
+
 Revision 0.4.0 lowers Advanced from 5 to 4 total threads (3 children), equal to
 Balanced, on the stated ground that the cap is a ceiling and not a delegation
 target; Balanced and Lean's caps are unchanged. This is a configuration and

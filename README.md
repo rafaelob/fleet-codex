@@ -11,16 +11,16 @@ third-party orchestration service to use these files.
 [Skills](skills/README.md) · [Plugins](plugins/README.md) ·
 [Validation and compatibility](docs/validation.md)
 
-Version 0.5.0 is a community preview. Historical hook and selected-role tests are
+Version 0.6.0 is a community preview. Historical hook and selected-role tests are
 recorded; the revised allocations and caps are not fully runtime-certified.
 
 ## Choose an arrangement
 
 | Arrangement | Lead | Specialist allocation | Configured cap / recommended active children |
 | --- | --- | --- | --- |
-| [Advanced Delivery](arrangements/advanced-delivery/README.md) | `gpt-6-sol`, `xhigh` | 15 roles: 4 Astra, 4 Sol, 7 Luna | 4 / up to 3 |
-| [Balanced Delivery](arrangements/balanced-delivery/README.md) | `gpt-6-sol`, `xhigh` | 12 roles: 2 Astra, 2 Sol, 8 Luna | 4 / up to 3 |
-| [Lean Delivery](arrangements/lean-delivery/README.md) | `gpt-6-sol`, `high` | 8 roles: 1 Astra, 1 Sol, 6 Luna | 3 / up to 2 |
+| [Advanced Delivery](arrangements/advanced-delivery/README.md) | `gpt-6.1-sol`, `high` | 15 roles: 4 Astra, 4 Sol, 7 Luna | 6 / up to 5 |
+| [Balanced Delivery](arrangements/balanced-delivery/README.md) | `gpt-6.1-sol`, `high` | 12 roles: 2 Astra, 2 Sol, 8 Luna | 6 / up to 5 |
+| [Lean Delivery](arrangements/lean-delivery/README.md) | `gpt-6.1-sol`, `high` | 8 roles: 1 Astra, 1 Sol, 6 Luna | 6 / up to 5 |
 
 The three arrangements provide progressively smaller role catalogs and enable
 Multi-Agent V2. Roles are available choices, not agents started together. Allocate only useful,
@@ -38,11 +38,14 @@ for backend implementation and integration review. Lean Delivery uses Luna
 broadly, keeps Astra for read-only advice, and uses Sol `high` to review integration
 across deliveries. Lean backend and frontend implementation use Luna. If ambiguity or business risk exceeds the selected
 role's capability, the lead reassesses the assignment before continuing.
+In all three, the Astra advisor is an escalation after a named failed attempt,
+not a first opinion; so is the hard-task-specialist in Advanced and Balanced.
 These are routing objectives, not measured cost or quality guarantees; total
 cost also depends on task length, retries and parallelism.
 
 The explicit V2 cap includes the lead in the target runtime. The child
-recommendations above reserve that slot. Recheck [compatibility evidence](docs/validation.md)
+recommendations above reserve that slot: a cap of 6 is the lead plus up to five
+simultaneous children, and it is a ceiling, not a target. Recheck [compatibility evidence](docs/validation.md)
 when upgrading the runtime or changing the cap's configuration field.
 
 ## What comes with an arrangement
